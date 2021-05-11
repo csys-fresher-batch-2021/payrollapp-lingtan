@@ -2,7 +2,7 @@
 <%@page import="in.lingtan.service.UserService"%>
 
 
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>admin Validation</title>
@@ -24,7 +24,6 @@ else{
 	response.sendRedirect("adminLogin.jsp?errorMessage="+message);
 }
 %>
-
 
 <br><a href="adminLogin.jsp">click to retry again</a>
 </body>

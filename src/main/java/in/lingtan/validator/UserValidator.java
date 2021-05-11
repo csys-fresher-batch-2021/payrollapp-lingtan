@@ -5,27 +5,23 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
 	
+	private UserValidator() {
+		//Default co
+	}
+	
 	public static boolean isEmployeeIdEmptyAndNull(String employeeId) {   //null, "" 
 		boolean isEmployeeNull = true;
-			if(employeeId == null){
+			if((employeeId == null)  || (employeeId.trim().length()==0) ){
 				isEmployeeNull = false;	
-				
-			}
-			else if(employeeId.trim().length()==0) {
-				 
-				isEmployeeNull = false;
 			}
 		return isEmployeeNull;
 	}
 	
 	public static boolean isValidEmployeeIdLength(String employeeId) {
 		boolean isValidEmployeeId = false;
-		if(employeeId!=null) {
-		if(employeeId.length() == 8) {
+		if(employeeId!=null && employeeId.length() == 8) {
 			isValidEmployeeId = true;
 		}
-		}
-		
 		return isValidEmployeeId;
 	}
 	

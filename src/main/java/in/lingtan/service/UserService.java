@@ -6,6 +6,10 @@ import java.util.Map;
 import in.lingtan.validator.UserValidator;
 
 public class UserService {
+	
+	private UserService() {
+		//Default constructor
+	}
 
 	static Map<String, String> adminCredentialHashTable = new HashMap<String, String>();
 
@@ -26,17 +30,11 @@ public class UserService {
 		boolean isValidAdmin = false;
 		boolean isEmployeeIdValid = UserValidator.employeeIdValidation(adminUsername);
 		boolean isValidPasswordFormat = UserValidator.isValidPasswordFormat(adminPassword);
-		if (isEmployeeIdValid == true && isValidPasswordFormat) {
-				if (adminCredentialHashTable.containsKey(adminUsername)) {
-					if (adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
+		if (isEmployeeIdValid && isValidPasswordFormat) {
+				if (adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
 						isValidAdmin = true;
 					}
 				}
-
-		}
-		else {
-			System.out.println("Invalid EmployeeID or Password");
-		}
 		return isValidAdmin;
 
 	}
