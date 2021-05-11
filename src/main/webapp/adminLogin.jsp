@@ -16,6 +16,7 @@
 <input type="text" name="adminUsername" id="adminUsername" placeholder="Employee ID" required autofocus><br/><br/>
 <input type ="password" name="adminPassword" id="adminPassword" placeholder="password" required ><br/>
 <%
+
 String errorMessage = request.getParameter("errorMessage");
 if(errorMessage!=null){
 	out.println("<font color='red'>"+errorMessage+"</font>");
