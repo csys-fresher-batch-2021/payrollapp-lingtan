@@ -29,7 +29,7 @@ public class UserServiceTestCase {
 		String employeeId = "Ling2657";
 		String password =  "@Password123";
 		boolean inValidCredentials = UserService.adminValidation(employeeId, password);
-		assertFalse(inValidCredentials);	
+		assertTrue(inValidCredentials);	
 	}	
 	
 	@Test
@@ -42,7 +42,7 @@ public class UserServiceTestCase {
 
 
 	@Test
-	public void adminValidationTestBothNull() { //Null empl
+	public void adminValidationTestBothNull() { //Null employee
 		String employeeId = null;
 		String password =  null;
 		boolean inValidCredentials = UserService.adminValidation(employeeId, password);

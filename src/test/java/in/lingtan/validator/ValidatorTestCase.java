@@ -41,7 +41,7 @@ public class ValidatorTestCase {
 	public void isValidEmployeeIdInvalidLengthTest() { //Invalid employee Id is validated
 	String employeeName = "Ling267";
 	boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeName);
-	assertTrue(isValidEmployeeId);
+	assertFalse(isValidEmployeeId);
 }
 
 	@Test
