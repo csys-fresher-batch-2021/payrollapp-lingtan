@@ -11,7 +11,7 @@ public class UserService {
 		//Default constructor
 	}
 
-	static Map<String, String> adminCredentialHashTable = new HashMap<String, String>();
+	static Map<String, String> adminCredentialHashTable = new HashMap<>();
 
 	static {
 		adminCredentialHashTable.put("Ling2657", "@Password123");
@@ -30,11 +30,9 @@ public class UserService {
 		boolean isValidAdmin = false;
 		boolean isEmployeeIdValid = UserValidator.employeeIdValidation(adminUsername);
 		boolean isValidPasswordFormat = UserValidator.isValidPasswordFormat(adminPassword);
-		if (isEmployeeIdValid && isValidPasswordFormat) {
-				if (adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
+		if (isEmployeeIdValid && isValidPasswordFormat && adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
 						isValidAdmin = true;
-					}
-				}
+		}
 		return isValidAdmin;
 
 	}
