@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class UserValidator {
 	
 	private UserValidator() {
-		//Default co
+		//Default constructor
 	}
 	
 	public static boolean isEmployeeIdEmptyAndNull(String employeeId) {   //null, "" 
@@ -17,6 +17,8 @@ public class UserValidator {
 		return isEmployeeNull;
 	}
 	
+	
+	//This method verifies whether the length of the employeeID is valid or not
 	public static boolean isValidEmployeeIdLength(String employeeId) {
 		boolean isValidEmployeeId = false;
 		if(employeeId!=null && employeeId.length() == 8) {
@@ -25,7 +27,7 @@ public class UserValidator {
 		return isValidEmployeeId;
 	}
 	
-	
+	//This method validates whether the employeeId is in valid Format or not i.e) valid id : Ling2657
 	public static boolean isValidEmployyeeIdFormat(String employeeId) {
 		boolean isValidFormat = false;
 		if(employeeId!=null) {
@@ -39,6 +41,7 @@ public class UserValidator {
 		return isValidFormat;
 	}
 	
+	//This method is a combined validation method where all the validations are combined to give one result for employeeID
 	public static boolean employeeIdValidation(String employeeId) {
 		boolean isValidAllParameters = false;
 		boolean isEmptyAndNull = isEmployeeIdEmptyAndNull(employeeId);
@@ -51,6 +54,7 @@ public class UserValidator {
 		return isValidAllParameters;
 	}
 	
+	//This method verifies whether the password is in valid format or not
 	public static boolean isValidPasswordFormat(String password) {
 		 boolean isValidFormat = false;
 		 if (password != null) {

@@ -17,7 +17,7 @@
 <input type ="password" name="adminPassword" id="adminPassword" placeholder="password" required ><br/>
 <%
 
-String errorMessage = request.getParameter("errorMessage");
+final String errorMessage = request.getParameter("errorMessage");
 if(errorMessage!=null){
 	out.println("<font color='red'>"+errorMessage+"</font>");
 }
