@@ -19,6 +19,7 @@ public class AdminValidationServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adminUsername = request.getParameter("adminUsername");
 		String adminPassword = request.getParameter("adminPassword");
