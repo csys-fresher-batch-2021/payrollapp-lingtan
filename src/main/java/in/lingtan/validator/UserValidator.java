@@ -17,7 +17,7 @@ public class UserValidator {
 	 * @return
 	 */
 	
-	public static boolean isValidEmployyeeIdFormat(String employeeId) {
+	public static boolean isValidEmployeeIdFormat(String employeeId) {
 		boolean isValidFormat = false;
 		if(employeeId!=null) {
 			String stringOfId  = employeeId.replaceAll("\\D", "");
@@ -40,7 +40,7 @@ public class UserValidator {
 		boolean isValidAllParameters = false;
 		boolean isEmptyAndNull = StringValidator.isEmployeeIdEmptyAndNull(employeeId);
 		boolean isValidEmployeeIdLength = StringValidator.isValidEmployeeIdLength(employeeId);
-		boolean isValidEmployeeIdFormat = isValidEmployyeeIdFormat(employeeId);
+		boolean isValidEmployeeIdFormat = isValidEmployeeIdFormat(employeeId);
 		
 		if(isEmptyAndNull && isValidEmployeeIdFormat && isValidEmployeeIdLength) {
 			isValidAllParameters = true;
@@ -52,7 +52,6 @@ public class UserValidator {
 	 * @param password
 	 * @return
 	 */
-	
 	public static boolean isValidPasswordFormat(String password) {
 		 boolean isValidFormat = false;
 		 if (password != null) {

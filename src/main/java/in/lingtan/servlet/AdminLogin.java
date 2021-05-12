@@ -12,8 +12,8 @@ import in.lingtan.service.UserService;
 /**
  * Servlet implementation class AdminValidationService
  */
-@WebServlet("/AdminValidationServlet")
-public class AdminValidationServlet extends HttpServlet {
+@WebServlet("/AdminLogin")
+public class AdminLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	/**

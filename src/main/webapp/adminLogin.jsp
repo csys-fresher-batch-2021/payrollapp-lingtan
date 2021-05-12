@@ -11,7 +11,7 @@
 
 <h2>Welcome</h2>
 <h3><strong>Admin Login portal</strong></h3>
-<form action="AdminValidationServlet" method="post">
+<form action="AdminLogin" method="post">
 
 <input type="text" name="adminUsername" id="adminUsername" placeholder="Employee ID" required autofocus><br/><br/>
 <input type ="password" name="adminPassword" id="adminPassword" placeholder="password" required ><br/>
