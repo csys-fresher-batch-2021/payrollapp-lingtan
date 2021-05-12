@@ -2,6 +2,9 @@ package in.lingtan.util;
 
 public class StringValidator {
 	
+	private StringValidator() {
+		//Default Constructor
+	}
 	/**
 	 * This method verifies whether an employeeId field is null or empty
 	 * @param employeeId
