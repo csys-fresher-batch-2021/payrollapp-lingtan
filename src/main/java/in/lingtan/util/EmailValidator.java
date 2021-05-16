@@ -3,12 +3,17 @@ package in.lingtan.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EmailValidator {
+import in.lingtan.EmployeeExceptions.InValidEmailIDException;
 
-	public static boolean isValidEmailId(String emailId, String errorMessage) {
-		boolean isValidEmailId = false;
+public class EmailValidator {
+	
+	private EmailValidator() {
+		//Defaut constructor
+	}
+
+	public static boolean isValidEmailId(String emailId, String errorMessage) throws InValidEmailIDException {
 		if (emailId == null || emailId.isEmpty()) {
-			throw new RuntimeException(errorMessage);
+			throw new NullPointerException(errorMessage);
 		}
 
 		else {
@@ -16,10 +21,9 @@ public class EmailValidator {
 			Pattern regexEmailFormat = Pattern.compile(regex);
 			Matcher matchEmailPattern = regexEmailFormat.matcher(emailId);
 			if (matchEmailPattern.matches()) {
-				isValidEmailId = matchEmailPattern.matches();
-				return isValidEmailId;
+				return matchEmailPattern.matches();
 			}
-			throw new RuntimeException(errorMessage);
+			throw new InValidEmailIDException(errorMessage);
 
 		}
 

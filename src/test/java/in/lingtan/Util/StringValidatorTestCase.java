@@ -13,7 +13,7 @@ public class StringValidatorTestCase {
 		try {
 			StringValidator.isStringNotNullOrEmpty(" ", "Field cannot be Empty");
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Field cannot be Empty");
+			assertEquals("Field cannot be Empty", e.getMessage());
 		}
 
 	}
@@ -24,7 +24,7 @@ public class StringValidatorTestCase {
 			boolean isValidString = StringValidator.isStringNotNullOrEmpty("Lingtan", "Field cannot be Empty");
 			assertTrue(isValidString);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Field cannot be Empty");
+			assertEquals("Field cannot be Empty", e.getMessage());
 		}
 
 	}
@@ -34,7 +34,7 @@ public class StringValidatorTestCase {
 		try {
 			StringValidator.isStringNotNullOrEmpty(null, "Field cannot be Empty");
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Field cannot be Empty");
+			assertEquals("Field cannot be Empty", e.getMessage());
 		}
 
 	}

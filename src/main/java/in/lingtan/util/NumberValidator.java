@@ -1,9 +1,18 @@
 package in.lingtan.util;
 
+import in.lingtan.EmployeeExceptions.InvalidMobileNumberException;
+import in.lingtan.EmployeeExceptions.InvalidNumberLengthException;
+import in.lingtan.EmployeeExceptions.NumberCannotBeNegativeException;
+
 public class NumberValidator {
-	
+
+	private NumberValidator() {
+		// Default constructor
+	}
+
 	/**
 	 * This Method validates if the mobile number contains only Long integer.
+	 * 
 	 * @param number
 	 * @param errorMessage
 	 * @return
@@ -12,8 +21,7 @@ public class NumberValidator {
 	public static Long isValidNumberOnly(String number, String errorMessage) {
 
 		try {
-			Long mobileNumber = Long.parseLong(number);
-			return mobileNumber;
+			return Long.parseLong(number);
 		} catch (Exception e) {
 			throw new RuntimeException(errorMessage);
 		}
@@ -25,27 +33,28 @@ public class NumberValidator {
 	 * 
 	 * @param number
 	 * @return
+	 * @throws InvalidNumberLengthException
 	 */
-	public static boolean isNumberValidLength(Long number) {
-		boolean isValidNumber = false;
+	public static boolean isNumberValidLength(Long number) throws InvalidNumberLengthException {
+
 		if (number != null) {
 			long numberString = (long) number.toString().trim().length();
 			if ((numberString == 10) && number != 0) {
-				isValidNumber = true;
+				return true;
 			} else {
-				throw new RuntimeException("Invalid Mobile Number Length");
+				throw new InvalidNumberLengthException("Invalid Mobile Number Length");
 			}
 		}
-		return isValidNumber;
+		return false;
 	}
 
-	public static boolean isNumberPositive(Long number) {
+	public static boolean isNumberPositive(Long number) throws NumberCannotBeNegativeException {
 		boolean isValidNumber = false;
 		if (number != null) {
 			if (number > 0) {
 				isValidNumber = true;
 			} else {
-				throw new RuntimeException("Mobile Cannot be Negative");
+				throw new NumberCannotBeNegativeException("Mobile Cannot be Negative");
 			}
 		}
 		return isValidNumber;
@@ -57,20 +66,17 @@ public class NumberValidator {
 	 * 
 	 * @param mobileNumber
 	 * @return
+	 * @throws InvalidMobileNumberException
 	 */
-	public static boolean isValidMobileNumber(long mobileNumber, String errorMessage) {
+	public static boolean isValidMobileNumber(long mobileNumber) throws InvalidMobileNumberException {
 		try {
-			boolean isValidMobileNumber = false;
-			boolean isValidMobileNumberLength = NumberValidator.isNumberValidLength(mobileNumber);
-			boolean isMobileNumberPositive = NumberValidator.isNumberPositive(mobileNumber);
 
-			if (isMobileNumberPositive && isValidMobileNumberLength) {
-				isValidMobileNumber = true;
+			NumberValidator.isNumberValidLength(mobileNumber);
+			NumberValidator.isNumberPositive(mobileNumber);
+			return true;
 
-			}
-			return isValidMobileNumber;
 		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
+			throw new InvalidMobileNumberException(e.getMessage());
 		}
 
 	}

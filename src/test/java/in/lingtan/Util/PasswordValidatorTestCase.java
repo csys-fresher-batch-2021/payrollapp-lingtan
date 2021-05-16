@@ -22,7 +22,7 @@ public class PasswordValidatorTestCase {
 			boolean isValidPassword = PasswordValidator.isValidPasswordFormat(password, "Invalid password format");
 			assertFalse(isValidPassword);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Invalid password format");
+			assertEquals("Invalid password format", e.getMessage());
 		}
 	}
 

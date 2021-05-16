@@ -1,5 +1,7 @@
 package in.lingtan.util;
 
+import in.lingtan.EmployeeExceptions.EmptyStringException;
+
 public class StringValidator {
 
 	private StringValidator() {
@@ -11,13 +13,14 @@ public class StringValidator {
 	 * 
 	 * @param role
 	 * @return
+	 * @throws EmptyStringException 
 	 */
-	public static boolean isStringNotNullOrEmpty(String stringToValidate, String errorMessage) {
-		boolean isValidRole = true;
+	public static boolean isStringNotNullOrEmpty(String stringToValidate, String errorMessage) throws EmptyStringException {
+		
 		if (stringToValidate == null || stringToValidate.trim().isEmpty()) {
-			throw new RuntimeException(errorMessage);
+			throw new EmptyStringException(errorMessage);
 		}
-		return isValidRole;
+		return true;
 	}
 
 }

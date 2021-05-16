@@ -1,7 +1,8 @@
 package in.lingtan.validator;
 
-import java.util.HashMap;
+import java.util.Map;
 
+import in.lingtan.EmployeeExceptions.ExistingEmployeeException;
 import in.lingtan.model.Employee;
 import in.lingtan.service.EmployeeService;
 
@@ -11,18 +12,18 @@ public class EmployeeValidator {
 		// Default Constructor.
 	}
 
-	public static boolean isEmployeeNotAvailable(Employee employee) {
-		boolean isAvailable = true;
-		HashMap<String, Employee> employeeMap = EmployeeService.getAllEmployees();
+	public static boolean isEmployeeNotAvailable(Employee employee) throws ExistingEmployeeException {
+	
+		Map<String, Employee> employeeMap = EmployeeService.getAllEmployees();
 		for (Employee employeeId : employeeMap.values()) {
 			if (employeeId.getMobileNumber() == employee.getMobileNumber()
 					&& employeeId.getLastName().toLowerCase().replaceAll("\\s", "")
 							.equalsIgnoreCase(employee.getLastName().toLowerCase().replaceAll("\\s", ""))) {
-				throw new RuntimeException(employeeId.getFirstName() + " - Already registered");
+				throw new ExistingEmployeeException(employeeId.getFirstName() + " - Already registered");
 			}
 
 		}
-		return isAvailable;
+		return true;
 
 	}
 }

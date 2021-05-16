@@ -4,6 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordValidator {
+	
+	private PasswordValidator() {
+		//Default constructor
+	}
 
 	/**
 	 * This method verifies whether the password is in valid format or not

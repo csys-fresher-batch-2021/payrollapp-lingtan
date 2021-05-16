@@ -4,14 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import in.lingtan.EmployeeExceptions.InValidEmailIDException;
 import in.lingtan.util.EmailValidator;
 
 public class EmailValidatorTestCase {
 
 	@Test
-	public void validEmailIdIsTested() {
+	public void validEmailIdIsTested() throws InValidEmailIDException {
 		String emailId = "lingtan.navisanthonisamy@gmail.com";
-		boolean isValidMail = EmailValidator.isValidEmailId(emailId, "Invalid EmailId");
+		boolean isValidMail = EmailValidator.isValidEmailId( emailId , "Invalid EmailId");
 		assertTrue(isValidMail);
 	}
 	
@@ -23,7 +24,7 @@ public class EmailValidatorTestCase {
 			assertFalse(isValidMail);
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), "Invalid Email-ID format");
-			e.printStackTrace();
+			
 		}
 	}
 	

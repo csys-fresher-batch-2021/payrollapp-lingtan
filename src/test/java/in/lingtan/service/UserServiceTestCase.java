@@ -3,13 +3,16 @@ package in.lingtan.service;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import in.lingtan.EmployeeExceptions.InvalidCredentialsException;
+
 public class UserServiceTestCase {
 
 	/**
 	 * Valid employeeID and Password
+	 * @throws InvalidCredentialsException 
 	 */
 	@Test
-	public void adminValidationTestBothValid() {
+	public void adminValidationTestBothValid() throws InvalidCredentialsException {
 		String employeeId = "Ling12007";
 		String password = "@Lingtan1112";
 		boolean inValidCredentials = UserService.adminValidation(employeeId, password);

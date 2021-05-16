@@ -22,7 +22,7 @@ public class NumberValidatorTestCase {
 			Long isValidNumber = NumberValidator.isValidNumberOnly(number, "Mobile Number cannot contain alphabets");
 			assertEquals(Long.valueOf(9600923846L), isValidNumber);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Mobile Number cannot contain alphabets");
+			assertEquals("Mobile Number cannot contain alphabets", e.getMessage());
 		}
 	}
 

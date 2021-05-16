@@ -2,6 +2,7 @@ package in.lingtan.model;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Employee {
 
@@ -143,11 +144,11 @@ public class Employee {
 		this.attendanceStatusForADate = attendanceStatusForADate;
 	}
 
-	public HashMap<LocalDate, Integer> getAttendanceMap() {
+	public Map<LocalDate, Integer> getAttendanceMap() {
 		return attendanceMap;
 	}
 
-	public void setAttendanceMap(HashMap<LocalDate, Integer> attendanceMap) {
+	public void setAttendanceMap(Map<LocalDate, Integer> attendanceMap) {
 		this.attendanceMap = attendanceMap;
 	}
 
@@ -176,6 +177,6 @@ public class Employee {
 	private int present;
 	private int absent;
 	private String attendanceStatusForADate;
-	private HashMap<LocalDate, Integer> attendanceMap = new HashMap<LocalDate, Integer>();
+	private Map<LocalDate, Integer> attendanceMap = new HashMap<>();
 
 }

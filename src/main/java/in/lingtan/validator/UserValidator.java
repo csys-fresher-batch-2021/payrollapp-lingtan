@@ -1,5 +1,8 @@
 package in.lingtan.validator;
 
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdException;
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdFormatException;
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdLengthException;
 import in.lingtan.util.StringValidator;
 
 public class UserValidator {
@@ -13,31 +16,31 @@ public class UserValidator {
 	 * i.e) valid id : Ling12007.
 	 * @param employeeId
 	 * @return
+	 * @throws InvalidEmployeeIdFormatException 
 	 */
 
-	public static boolean isValidEmployeeIdFormat(String employeeId) {
-		boolean isValidFormat = false;
+	public static boolean isValidEmployeeIdFormat(String employeeId) throws  InvalidEmployeeIdFormatException {
+
 		String digitsOfId = employeeId.replaceAll("\\D", "");
 		String stringOfId = employeeId.replaceAll("\\d", "");
 		if ((stringOfId.length() == 4) && (digitsOfId.length() == 5)) {
-			isValidFormat = true;
-			return isValidFormat;
+			return true;
 		}
-		throw new RuntimeException("Invalid EmployeeID Format");
+		throw new InvalidEmployeeIdFormatException("Invalid EmployeeID Format");
 	}
 
 	/**
 	 * This method verifies whether the length of the employeeID is valid or not.
 	 * @param employeeId
 	 * @return
+	 * @throws InvalidEmployeeIdLengthException 
 	 */
-	public static boolean isValidEmployeeIdLength(String employeeId) {
-		boolean isValidEmployeeId = false;
-		if (employeeId.length() == 9 || employeeId == null ) {
-			isValidEmployeeId = true;
-			return isValidEmployeeId;
+	public static boolean isValidEmployeeIdLength(String employeeId) throws InvalidEmployeeIdLengthException {
+		
+		if (employeeId == null || employeeId.length() == 9 ) {
+			return true;
 		}
-		throw new RuntimeException("Invalid Length");
+		throw new InvalidEmployeeIdLengthException("Invalid Length");
 	}
 
 	/**
@@ -45,21 +48,18 @@ public class UserValidator {
 	 * combined to give one result for employeeID
 	 * @param employeeId
 	 * @return
+	 * @throws InvalidEmployeeIdException 
 	 */
 
-	public static boolean isValidEmployeeId(String employeeId, String errorMessage) {
+	public static boolean isValidEmployeeId(String employeeId, String errorMessage) throws InvalidEmployeeIdException {
 		try {
-			boolean isStringNullOrEmpty = StringValidator.isStringNotNullOrEmpty(employeeId, errorMessage);
-			boolean isValidEmployeeIdFormat = isValidEmployeeIdFormat(employeeId);
-			boolean isValidEmployeeIdLength = isValidEmployeeIdLength(employeeId);
-
-			if (isStringNullOrEmpty && isValidEmployeeIdFormat && isValidEmployeeIdLength) {
-				return true;
-			} else {
-				throw new RuntimeException(errorMessage);
-			}
+			StringValidator.isStringNotNullOrEmpty(employeeId, errorMessage);
+			isValidEmployeeIdFormat(employeeId);
+			isValidEmployeeIdLength(employeeId);
+			return true;
+			
 		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
+			throw new InvalidEmployeeIdException(e.getMessage());
 		}
 	}
 

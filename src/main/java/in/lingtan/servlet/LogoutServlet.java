@@ -20,6 +20,7 @@ public class LogoutServlet extends HttpServlet {
 	 * This method invalidates the employee id stored in the session when the logout button is clicked.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();

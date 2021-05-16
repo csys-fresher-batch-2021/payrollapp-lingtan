@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.lingtan.EmployeeExceptions.CannotRegisterEmployeeException;
 import in.lingtan.model.Employee;
 import in.lingtan.service.EmployeeService;
 import in.lingtan.util.DateValidator;
@@ -30,6 +31,7 @@ public class RegisterEmployeeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,7 +54,7 @@ public class RegisterEmployeeServlet extends HttpServlet {
 			DateValidator.isNotAFutureDate((parsedDob), "DOB cannot be a future date");
 
 			Long validatedMobileNumber = NumberValidator.isValidNumberOnly(mobileNumber,"Mobile Number cannot contain alphabets");
-			NumberValidator.isValidMobileNumber(validatedMobileNumber, "Invalid Mobile Number");
+			NumberValidator.isValidMobileNumber(validatedMobileNumber);
 
 			LocalDate parsedJoinedDate = DateValidator.isDateFormatOrNot(joinedDate, "Invalid Joining Date Format");
 			DateValidator.isNotAFutureDate(parsedJoinedDate, "Joining Date cannot be a future date");
@@ -72,7 +74,7 @@ public class RegisterEmployeeServlet extends HttpServlet {
 				String successMessage = "Successfully Registered";
 				response.sendRedirect("registerEmployee.jsp?infoMessage=" + successMessage + "&registeredEmployeeId=" + employee.getFirstName());
 			} else {
-				throw new RuntimeException("Cannot Register user");
+				throw new CannotRegisterEmployeeException("Cannot Register user");
 			}
 		} catch (Exception e) {
 			response.sendRedirect("registerEmployee.jsp?errorMessage=" + e.getMessage());

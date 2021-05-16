@@ -1,6 +1,12 @@
 package in.lingtan.service;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import in.lingtan.EmployeeExceptions.CannotRegisterEmployeeException;
+import in.lingtan.EmployeeExceptions.ExistingEmployeeException;
+import in.lingtan.EmployeeExceptions.InValidEmailIDException;
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdException;
 import in.lingtan.model.Employee;
 import in.lingtan.util.EmailValidator;
 import in.lingtan.validator.EmployeeValidator;
@@ -8,8 +14,8 @@ import in.lingtan.validator.UserValidator;
 
 public class EmployeeService {
 
-	private final static HashMap<String, Employee> employeeMap = new HashMap<>();
-	private final static HashMap<String, String> masterCredentialStorage = new HashMap<>();
+	private static final HashMap<String, Employee> employeeMap = new HashMap<>();
+	private static final HashMap<String, String> masterCredentialStorage = new HashMap<>();
 
 	private EmployeeService() {
 		// Default constructor.
@@ -20,7 +26,7 @@ public class EmployeeService {
 	 * 
 	 * @return
 	 */
-	public static HashMap<String, Employee> getAllEmployees() {
+	public static Map<String, Employee> getAllEmployees() {
 		return employeeMap;
 	}
 
@@ -30,10 +36,14 @@ public class EmployeeService {
 	 * 
 	 * @param employee
 	 * @return
+	 * @throws CannotRegisterEmployeeException 
+	 * @throws InvalidEmployeeIdException 
+	 * @throws InValidEmailIDException 
+	 * @throws ExistingEmployeeException 
 	 */
-	public static boolean addEmployee(Employee employee) {
+	public static boolean addEmployee(Employee employee) throws CannotRegisterEmployeeException, InvalidEmployeeIdException, InValidEmailIDException, ExistingEmployeeException {
 
-		boolean isAddedEmployee = false;
+	
 
 		String generatedEmployeeId = EmployeeService.generateEmployeeId(employee);
 		UserValidator.isValidEmployeeId(generatedEmployeeId, "Invalid Employee ID");
@@ -47,10 +57,9 @@ public class EmployeeService {
 		if (isEmployeeAvailable) {
 			employeeMap.put(employee.getEmployeeID(), employee);
 			masterCredentialStorage.put(employee.getEmployeeID(), "@password123");
-			isAddedEmployee = true;
-			return isAddedEmployee;
+			return true;
 		} else {
-			throw new RuntimeException("Cannot add employee");
+			throw new CannotRegisterEmployeeException("Cannot add employee");
 		}
 	}
 
@@ -84,7 +93,9 @@ public class EmployeeService {
 		}else {
 			employeeIdCharacters = firstName.substring(0, 1).toUpperCase()
 					+ firstName.substring(1, 4) + employee.getDob().toString().substring(8, 10);
-		} if ((employeeMap.size() == 0)) {
+		} 
+		
+		if ((employeeMap.size() == 0)) {
 			employeeIdDigits = "00" + Integer.toString(firstName.length());
 		} else if ((employeeMap.size() < 10) && (employeeMap.size() > 0)) {
 			employeeIdDigits = "0" + Integer.toString(employeeMap.size())
@@ -114,9 +125,9 @@ public class EmployeeService {
 	public static String generateEmail(Employee employee) {
 		String firstName = employee.getFirstName();
 		String lastName = employee.getLastName();
-		String generatedEmail = firstName.toLowerCase() + "." + lastName.toLowerCase().replaceAll("\\s", "")
+		return firstName.toLowerCase() + "." + lastName.toLowerCase().replaceAll("\\s", "")
 				+ employee.getEmployeeID().substring(4, 9) + ("@companyname.com");
-		return generatedEmail;
+	
 	}
 
 }

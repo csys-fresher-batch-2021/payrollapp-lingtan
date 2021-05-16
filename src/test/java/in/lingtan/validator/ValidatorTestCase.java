@@ -4,13 +4,17 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdException;
+import in.lingtan.EmployeeExceptions.InvalidEmployeeIdLengthException;
+
 public class ValidatorTestCase {
 
 	/**
 	 * Valid employeeId length is validated
+	 * @throws InvalidEmployeeIdLengthException 
 	 */
 	@Test
-	public void ValidEmployeeIdLengthTest() {
+	public void ValidEmployeeIdLengthTest() throws InvalidEmployeeIdLengthException {
 		String employeeId = "Ling12007";
 		boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
 		assertTrue(isValidEmployeeId);
@@ -26,15 +30,16 @@ public class ValidatorTestCase {
 			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Invalid Length");
+			assertEquals("Invalid Length", e.getMessage());
 		}
 	}
 
 	/**
 	 * Invalid employee Id is validated
+	 * @throws InvalidEmployeeIdException 
 	 */
 	@Test
-	public void InvalidEmployeeIdTest() {
+	public void InvalidEmployeeIdTest() throws InvalidEmployeeIdException {
 			String employeeId = "Ling12007";
 			boolean isValidEmployeeId = UserValidator.isValidEmployeeId(employeeId, "Invalid EmployeeID format or length");
 			assertTrue(isValidEmployeeId);
@@ -50,7 +55,7 @@ public class ValidatorTestCase {
 			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Invalid EmployeeID Format");
+			assertEquals("Invalid EmployeeID Format" ,e.getMessage());
 		}
 	}
 	
@@ -64,7 +69,7 @@ public class ValidatorTestCase {
 			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Invalid EmployeeID Format");
+			assertEquals("Invalid EmployeeID Format", e.getMessage());
 		}
 	}
 
