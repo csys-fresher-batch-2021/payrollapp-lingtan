@@ -1,8 +1,11 @@
 package in.lingtan.util;
 
-import in.lingtan.EmployeeExceptions.InvalidMobileNumberException;
-import in.lingtan.EmployeeExceptions.InvalidNumberLengthException;
-import in.lingtan.EmployeeExceptions.NumberCannotBeNegativeException;
+import org.apache.taglibs.standard.lang.jstl.parser.ParseException;
+
+import in.lingtan.employeeExceptions.InvalidLongNumberTypeException;
+import in.lingtan.employeeExceptions.InvalidMobileNumberException;
+import in.lingtan.employeeExceptions.InvalidNumberLengthException;
+import in.lingtan.employeeExceptions.NumberCannotBeNegativeException;
 
 public class NumberValidator {
 
@@ -16,14 +19,16 @@ public class NumberValidator {
 	 * @param number
 	 * @param errorMessage
 	 * @return
+	 * @throws ParseException 
+	 * @throws InvalidLongNumberTypeException 
 	 */
 
-	public static Long isValidNumberOnly(String number, String errorMessage) {
+	public static Long isValidNumberOnly(String number, String errorMessage) throws ParseException, InvalidLongNumberTypeException {
 
 		try {
 			return Long.parseLong(number);
 		} catch (Exception e) {
-			throw new RuntimeException(errorMessage);
+			throw new InvalidLongNumberTypeException(errorMessage);
 		}
 
 	}

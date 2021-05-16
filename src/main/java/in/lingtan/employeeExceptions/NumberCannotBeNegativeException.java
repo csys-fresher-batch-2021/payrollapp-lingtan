@@ -1,4 +1,4 @@
-package in.lingtan.EmployeeExceptions;
+package in.lingtan.employeeExceptions;
 
 public class NumberCannotBeNegativeException extends Exception {
 

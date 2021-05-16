@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.lingtan.employeeExceptions.InvalidCredentialsException;
 import in.lingtan.service.UserService;
 import in.lingtan.util.StringValidator;
 import in.lingtan.validator.UserValidator;
@@ -29,12 +30,10 @@ public class AdminLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String adminUsername = request.getParameter("adminUsername");
-		String adminPassword = request.getParameter("adminPassword");
-
 		try {
-			
+	
+			String adminUsername = request.getParameter("adminUsername");
+			String adminPassword = request.getParameter("adminPassword");			
 			UserValidator.isValidEmployeeId(adminUsername, "Invalid Employee ID");
 			StringValidator.isStringNotNullOrEmpty(adminPassword, "Password field Cannot be empty");
 
@@ -44,6 +43,10 @@ public class AdminLoginServlet extends HttpServlet {
 				session.setAttribute("ADMIN_ID", adminUsername);
 				session.setMaxInactiveInterval(1000);
 				response.sendRedirect("adminPortal.jsp");
+			}
+			else {
+				throw new InvalidCredentialsException("Invalid Admin Credentials");
+			
 			}
 		} catch (Exception e) {
 			response.sendRedirect("adminLogin.jsp?errorMessage=" + e.getMessage());

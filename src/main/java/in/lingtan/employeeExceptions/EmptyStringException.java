@@ -1,4 +1,4 @@
-package in.lingtan.EmployeeExceptions;
+package in.lingtan.employeeExceptions;
 
 public class EmptyStringException extends Exception {
 
@@ -9,7 +9,7 @@ public class EmptyStringException extends Exception {
 
 	public EmptyStringException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

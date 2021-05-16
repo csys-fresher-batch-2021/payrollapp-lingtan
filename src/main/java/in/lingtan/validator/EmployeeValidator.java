@@ -2,7 +2,7 @@ package in.lingtan.validator;
 
 import java.util.Map;
 
-import in.lingtan.EmployeeExceptions.ExistingEmployeeException;
+import in.lingtan.employeeExceptions.ExistingEmployeeException;
 import in.lingtan.model.Employee;
 import in.lingtan.service.EmployeeService;
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.lingtan.EmployeeExceptions.CannotRegisterEmployeeException;
+import in.lingtan.employeeExceptions.CannotRegisterEmployeeException;
 import in.lingtan.model.Employee;
 import in.lingtan.service.EmployeeService;
 import in.lingtan.util.DateValidator;

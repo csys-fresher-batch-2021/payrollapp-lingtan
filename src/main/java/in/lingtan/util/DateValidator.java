@@ -2,7 +2,7 @@ package in.lingtan.util;
 
 import java.time.LocalDate;
 
-import in.lingtan.EmployeeExceptions.InvalidDateException;
+import in.lingtan.employeeExceptions.InvalidDateException;
 
 public class DateValidator {
 
@@ -38,8 +38,8 @@ public class DateValidator {
 
 	public static LocalDate isDateFormatOrNot(String dateToCheck, String errorMessage) throws InvalidDateException {
 		try {
-			LocalDate isValidDateFormat = LocalDate.parse(dateToCheck);
-			return isValidDateFormat;
+			
+			return LocalDate.parse(dateToCheck);
 		} catch (Exception e) {
 			throw new InvalidDateException(errorMessage);
 		}

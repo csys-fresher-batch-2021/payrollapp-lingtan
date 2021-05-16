@@ -1,8 +1,8 @@
 package in.lingtan.validator;
 
-import in.lingtan.EmployeeExceptions.InvalidEmployeeIdException;
-import in.lingtan.EmployeeExceptions.InvalidEmployeeIdFormatException;
-import in.lingtan.EmployeeExceptions.InvalidEmployeeIdLengthException;
+import in.lingtan.employeeExceptions.InvalidEmployeeIdException;
+import in.lingtan.employeeExceptions.InvalidEmployeeIdFormatException;
+import in.lingtan.employeeExceptions.InvalidEmployeeIdLengthException;
 import in.lingtan.util.StringValidator;
 
 public class UserValidator {

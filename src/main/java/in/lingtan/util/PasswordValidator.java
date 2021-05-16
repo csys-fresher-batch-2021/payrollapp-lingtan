@@ -3,6 +3,8 @@ package in.lingtan.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import in.lingtan.employeeExceptions.InvalidPasswordFormatException;
+
 public class PasswordValidator {
 	
 	private PasswordValidator() {
@@ -14,8 +16,9 @@ public class PasswordValidator {
 	 * 
 	 * @param password
 	 * @return
+	 * @throws InvalidPasswordFormatException 
 	 */
-	public static boolean isValidPasswordFormat(String password, String errorMessage) {
+	public static boolean isValidPasswordFormat(String password, String errorMessage) throws InvalidPasswordFormatException {
 		boolean isValidFormat = false;
 		if (password != null) {
 			String regex = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$).{8,15}$";
@@ -25,7 +28,7 @@ public class PasswordValidator {
 			if (isValidFormat) {
 				return isValidFormat;
 			}
-			throw new RuntimeException(errorMessage);
+			throw new InvalidPasswordFormatException(errorMessage);
 		}
 		return isValidFormat;
 

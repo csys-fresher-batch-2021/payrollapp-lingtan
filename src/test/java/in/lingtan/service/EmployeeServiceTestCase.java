@@ -9,10 +9,10 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Test;
 
-import in.lingtan.EmployeeExceptions.CannotRegisterEmployeeException;
-import in.lingtan.EmployeeExceptions.ExistingEmployeeException;
-import in.lingtan.EmployeeExceptions.InValidEmailIDException;
-import in.lingtan.EmployeeExceptions.InvalidEmployeeIdException;
+import in.lingtan.employeeExceptions.CannotRegisterEmployeeException;
+import in.lingtan.employeeExceptions.ExistingEmployeeException;
+import in.lingtan.employeeExceptions.InValidEmailIDException;
+import in.lingtan.employeeExceptions.InvalidEmployeeIdException;
 import in.lingtan.model.Employee;
 
 public class EmployeeServiceTestCase {

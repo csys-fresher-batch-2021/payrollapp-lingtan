@@ -1,4 +1,4 @@
-package in.lingtan.EmployeeExceptions;
+package in.lingtan.employeeExceptions;
 
 public class InvalidEmployeeIdFormatException extends Exception {
 
@@ -9,7 +9,7 @@ public class InvalidEmployeeIdFormatException extends Exception {
 
 	public InvalidEmployeeIdFormatException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }
