@@ -3,7 +3,6 @@ package in.lingtan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.lingtan.validator.UserValidator;
 
 public class UserService {
 	
@@ -14,7 +13,7 @@ public class UserService {
 	private final static Map<String, String> adminCredentialHashTable = new HashMap<>();
 
 	static {
-		adminCredentialHashTable.put("Ling2657", "@Password123");
+		adminCredentialHashTable.put("Ling12007", "@Lingtan1112");
 	}
 
 	/**
@@ -27,14 +26,15 @@ public class UserService {
 	 */
 
 	public static boolean adminValidation(String adminUsername, String adminPassword) {
+			
 		boolean isValidAdmin = false;
-		boolean isEmployeeIdValid = UserValidator.employeeIdValidation(adminUsername);
-		boolean isValidPasswordFormat = UserValidator.isValidPasswordFormat(adminPassword);
-		if (isEmployeeIdValid && isValidPasswordFormat && adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
+		if (adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
 						isValidAdmin = true;
+						return isValidAdmin;
 		}
-		return isValidAdmin;
-
+		else {
+			throw new RuntimeException("Invalid Admin Credentials");
+		}
+		
 	}
-
 }

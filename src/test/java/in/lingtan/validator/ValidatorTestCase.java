@@ -4,90 +4,69 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import in.lingtan.util.StringValidator;
-
 public class ValidatorTestCase {
-	
+
 	/**
-	 *Null employee id is validated
+	 * Valid employeeId length is validated
 	 */
 	@Test
-	public void isEmployeeIdNull() { 
-		String employeeName = null;
-		boolean isValidEmployeeId = StringValidator.isEmployeeIdEmptyAndNull(employeeName);
-		assertFalse(isValidEmployeeId);
-	}
-	
-	/**
-	 * valid string is passed
-	 */
-	@Test
-	public void isEmployeeIdValidCase() { 
-		String employeeName = "Ling";
-		boolean isValidEmployeeId = StringValidator.isEmployeeIdEmptyAndNull(employeeName);
+	public void ValidEmployeeIdLengthTest() {
+		String employeeId = "Ling12007";
+		boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
 		assertTrue(isValidEmployeeId);
 	}
 	
 	/**
-	 * employeeId is empty
+	 * invalid employeeId length is validated
 	 */
 	@Test
-	public void isEmployeeIdEmpty() { 
-		String employeeName = "";
-		boolean isValidEmployeeId = StringValidator.isEmployeeIdEmptyAndNull(employeeName);
-		assertFalse(isValidEmployeeId);
+	public void invalidEmployeeIdLengthTest() {
+		try {
+			String employeeId = "Ling120";
+			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
+			assertTrue(isValidEmployeeId);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "Invalid Length");
+		}
 	}
-	
-	/**
-	 *Valid employeeId length  is validated 
-	 */
-	@Test
-	public void isValidEmployeeIdValidLengthTest() { 
-		String employeeName = "Ling2657";
-		boolean isValidEmployeeId = StringValidator.isValidEmployeeIdLength(employeeName);
-		assertTrue(isValidEmployeeId);
-	}
-	
+
 	/**
 	 * Invalid employee Id is validated
 	 */
 	@Test
-	public void isValidEmployeeIdInvalidLengthTest() { 
-		String employeeName = "Ling267";
-		boolean isValidEmployeeId = StringValidator.isValidEmployeeIdLength(employeeName);
-		assertFalse(isValidEmployeeId);
+	public void InvalidEmployeeIdTest() {
+			String employeeId = "Ling12007";
+			boolean isValidEmployeeId = UserValidator.isValidEmployeeId(employeeId, "Invalid EmployeeID format or length");
+			assertTrue(isValidEmployeeId);
 	}
 	
 	/**
-	 * username is wrong password is correct
+	 * Valid employeeId format is validated.
 	 */
 	@Test
-	public void isValidPasswordFormatValidTest() { 
-		String password =  "Lingtan123@";
-		boolean isValidPasswordLength = UserValidator.isValidPasswordFormat(password);
-		assertTrue(isValidPasswordLength);
+	public void invalidEmployyeeIdFormatTest() {
+		try {
+			String employeeName = "Ling145";
+			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
+			assertTrue(isValidEmployeeId);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "Invalid EmployeeID Format");
+		}
 	}
 	
 	/**
-	 * Valid employeeId format is validated
+	 * Valid employeeId format is validated.
 	 */
 	@Test
-		public void isValidFormatEmployyeeIdValidTest() { 
-		String employeeName = "Lin2657";
-			boolean isValidEmployeeId = UserValidator.isValidEmployyeeIdFormat(employeeName);
-	assertFalse(isValidEmployeeId);
+	public void validEmployyeeIdFormatTest() {
+		try {
+			String employeeName = "Ling12007";
+			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
+			assertTrue(isValidEmployeeId);
+		} catch (Exception e) {
+			assertEquals(e.getMessage(), "Invalid EmployeeID Format");
+		}
 	}
-	
-	
-	/**
-	 * username is wrong password is correct
-	 */
-	@Test
-	public void isValidPasswordFormatInvalidTest() { 
-		String password =  "raja123";
-		boolean isValidPasswordLength = UserValidator.isValidPasswordFormat(password);
-		assertFalse(isValidPasswordLength);
-	}
-	
+
 
 }

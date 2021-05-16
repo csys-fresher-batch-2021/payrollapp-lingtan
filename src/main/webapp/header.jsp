@@ -2,6 +2,11 @@
 <link rel="stylesheet" href="assets/css/fontawesome.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<%
+String employeeId = (String)session.getAttribute("ADMIN_ID");
+
+%>
+
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand" href="index.jsp">PayRoll-App</a>
@@ -26,13 +31,21 @@
       </li>
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <%if(employeeId == null){ %>
       <li class="nav-item active">
         <a class="nav-link" href="adminLogin.jsp">Login</a>
       </li>
+    
+  	<%}else if(employeeId.equals("Ling12007")){ %>
       <li class="nav-item">
-        <a class="nav-link" href="registerEmployee.jsp">Register</a>
+        <a class="nav-link" href="LogoutServlet">Logout</a>
+       </li>
+       <li>
+       	<a class="nav-link" href="registerEmployee.jsp">Register</a>
       </li>
       </ul>
+   <%} %>
+
    
   </div>
 </nav>
