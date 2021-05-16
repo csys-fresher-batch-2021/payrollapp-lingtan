@@ -4,12 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import in.lingtan.employeeExceptions.InvalidPasswordFormatException;
 import in.lingtan.util.PasswordValidator;
 
 public class PasswordValidatorTestCase {
 
 	@Test
-	public void validPasswordFormatIsTested() {
+	public void validPasswordFormatIsTested() throws InvalidPasswordFormatException {
 		String password = "@Password123";
 		boolean isValidPassword = PasswordValidator.isValidPasswordFormat(password, "Invalid password format");
 		assertTrue(isValidPassword);
