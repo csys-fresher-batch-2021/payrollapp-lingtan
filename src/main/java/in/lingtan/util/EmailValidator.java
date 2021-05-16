@@ -3,7 +3,7 @@ package in.lingtan.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import in.lingtan.employeeExceptions.InValidEmailIDException;
+import in.lingtan.employee.InValidEmailIDException;
 
 public class EmailValidator {
 	

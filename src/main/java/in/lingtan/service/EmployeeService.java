@@ -3,10 +3,10 @@ package in.lingtan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.lingtan.employeeExceptions.CannotRegisterEmployeeException;
-import in.lingtan.employeeExceptions.ExistingEmployeeException;
-import in.lingtan.employeeExceptions.InValidEmailIDException;
-import in.lingtan.employeeExceptions.InvalidEmployeeIdException;
+import in.lingtan.employee.CannotRegisterEmployeeException;
+import in.lingtan.employee.ExistingEmployeeException;
+import in.lingtan.employee.InValidEmailIDException;
+import in.lingtan.employee.InvalidEmployeeIdException;
 import in.lingtan.model.Employee;
 import in.lingtan.util.EmailValidator;
 import in.lingtan.validator.EmployeeValidator;

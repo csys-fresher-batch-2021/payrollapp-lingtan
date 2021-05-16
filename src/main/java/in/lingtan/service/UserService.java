@@ -3,7 +3,7 @@ package in.lingtan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.lingtan.employeeExceptions.InvalidCredentialsException;
+import in.lingtan.employee.InvalidCredentialsException;
 
 
 public class UserService {
@@ -28,13 +28,12 @@ public class UserService {
 	 * @throws InvalidCredentialsException 
 	 */
 
-	public static boolean adminValidation(String adminUsername, String adminPassword) throws InvalidCredentialsException {
+	public static boolean adminValidation(String adminUsername, String adminPassword)  {
 			
-		
+		boolean isValidCredentials = false;
 		if (adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
-					return true;
+			isValidCredentials =  true;
 		}
-		return false;
-		
+		return isValidCredentials;
 	}
 }

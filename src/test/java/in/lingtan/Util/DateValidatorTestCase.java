@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import in.lingtan.employeeExceptions.InvalidDateException;
+import in.lingtan.employee.InvalidDateException;
 import in.lingtan.util.DateValidator;
 
 public class DateValidatorTestCase {

@@ -2,7 +2,7 @@ package in.lingtan.util;
 
 import java.time.LocalDate;
 
-import in.lingtan.employeeExceptions.InvalidDateException;
+import in.lingtan.employee.InvalidDateException;
 
 public class DateValidator {
 

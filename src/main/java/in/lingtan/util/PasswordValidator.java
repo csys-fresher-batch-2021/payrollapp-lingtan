@@ -3,7 +3,7 @@ package in.lingtan.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import in.lingtan.employeeExceptions.InvalidPasswordFormatException;
+import in.lingtan.employee.InvalidPasswordFormatException;
 
 public class PasswordValidator {
 	

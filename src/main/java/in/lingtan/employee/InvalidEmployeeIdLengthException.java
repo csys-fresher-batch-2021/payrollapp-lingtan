@@ -1,4 +1,4 @@
-package in.lingtan.employeeExceptions;
+package in.lingtan.employee;
 
 public class InvalidEmployeeIdLengthException extends Exception {
 

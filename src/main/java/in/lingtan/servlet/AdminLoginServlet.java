@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import in.lingtan.employeeExceptions.InvalidCredentialsException;
+import in.lingtan.employee.InvalidCredentialsException;
 import in.lingtan.service.UserService;
 import in.lingtan.util.StringValidator;
 import in.lingtan.validator.UserValidator;
