@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import in.lingtan.employee.InvalidPasswordFormatException;
+import in.lingtan.exceptions.InvalidPasswordFormatException;
 import in.lingtan.util.PasswordValidator;
 
 public class PasswordValidatorTestCase {

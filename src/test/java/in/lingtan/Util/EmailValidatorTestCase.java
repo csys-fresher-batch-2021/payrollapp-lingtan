@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import in.lingtan.employee.InValidEmailIDException;
+import in.lingtan.exceptions.InValidEmailIDException;
 import in.lingtan.util.EmailValidator;
 
 public class EmailValidatorTestCase {

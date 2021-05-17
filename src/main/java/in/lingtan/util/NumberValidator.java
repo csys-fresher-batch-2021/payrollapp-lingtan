@@ -2,10 +2,10 @@ package in.lingtan.util;
 
 import org.apache.taglibs.standard.lang.jstl.parser.ParseException;
 
-import in.lingtan.employee.InvalidLongNumberTypeException;
-import in.lingtan.employee.InvalidMobileNumberException;
-import in.lingtan.employee.InvalidNumberLengthException;
-import in.lingtan.employee.NumberCannotBeNegativeException;
+import in.lingtan.exceptions.InvalidLongNumberTypeException;
+import in.lingtan.exceptions.InvalidMobileNumberException;
+import in.lingtan.exceptions.InvalidNumberLengthException;
+import in.lingtan.exceptions.NumberCannotBeNegativeException;
 
 public class NumberValidator {
 

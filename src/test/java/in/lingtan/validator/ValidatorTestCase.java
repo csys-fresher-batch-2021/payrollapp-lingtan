@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import in.lingtan.employee.InvalidEmployeeIdException;
-import in.lingtan.employee.InvalidEmployeeIdLengthException;
+import in.lingtan.exceptions.InvalidEmployeeIdException;
+import in.lingtan.exceptions.InvalidEmployeeIdLengthException;
 
 public class ValidatorTestCase {
 

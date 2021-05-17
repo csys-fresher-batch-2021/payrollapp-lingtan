@@ -3,7 +3,7 @@ package in.lingtan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.lingtan.employee.InvalidCredentialsException;
+import in.lingtan.exceptions.InvalidCredentialsException;
 
 
 public class UserService {

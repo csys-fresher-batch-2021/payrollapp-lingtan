@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.lingtan.employee.CannotRegisterEmployeeException;
+import in.lingtan.exceptions.CannotRegisterEmployeeException;
 import in.lingtan.model.Employee;
 import in.lingtan.service.EmployeeService;
 import in.lingtan.util.DateValidator;
@@ -35,16 +35,15 @@ public class RegisterEmployeeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Employee employee = new Employee();
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String dob = request.getParameter("dob");
-		String role = request.getParameter("Role");
-		String mobileNumber = request.getParameter("Mobile-Number");
-		String joinedDate = request.getParameter("Joined-Date");
-		String gender = request.getParameter("Gender");
-
 		try {
+			Employee employee = new Employee();
+			String firstName = request.getParameter("firstName");
+			String lastName = request.getParameter("lastName");
+			String dob = request.getParameter("dob");
+			String role = request.getParameter("Role");
+			String mobileNumber = request.getParameter("Mobile-Number");
+			String joinedDate = request.getParameter("Joined-Date");
+			String gender = request.getParameter("Gender");
 
 			StringValidator.isStringNotNullOrEmpty(firstName, "FirstName field Cannot be Empty");
 
@@ -53,7 +52,8 @@ public class RegisterEmployeeServlet extends HttpServlet {
 			LocalDate parsedDob = DateValidator.isDateFormatOrNot(dob, "Invalid DOB Date Format");
 			DateValidator.isNotAFutureDate((parsedDob), "DOB cannot be a future date");
 
-			Long validatedMobileNumber = NumberValidator.isValidNumberOnly(mobileNumber,"Mobile Number cannot contain alphabets");
+			Long validatedMobileNumber = NumberValidator.isValidNumberOnly(mobileNumber,
+					"Mobile Number cannot contain alphabets");
 			NumberValidator.isValidMobileNumber(validatedMobileNumber);
 
 			LocalDate parsedJoinedDate = DateValidator.isDateFormatOrNot(joinedDate, "Invalid Joining Date Format");
@@ -72,13 +72,13 @@ public class RegisterEmployeeServlet extends HttpServlet {
 
 			if (isAddedEmployee) {
 				String successMessage = "Successfully Registered";
-				response.sendRedirect("registerEmployee.jsp?infoMessage=" + successMessage + "&registeredEmployeeId=" + employee.getFirstName());
+				response.sendRedirect("registerEmployee.jsp?infoMessage=" + successMessage + "&registeredEmployeeId="
+						+ employee.getFirstName());
 			} else {
 				throw new CannotRegisterEmployeeException("Cannot Register user");
 			}
 		} catch (Exception e) {
 			response.sendRedirect("registerEmployee.jsp?errorMessage=" + e.getMessage());
-
 		}
 
 	}

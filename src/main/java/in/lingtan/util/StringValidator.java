@@ -1,6 +1,6 @@
 package in.lingtan.util;
 
-import in.lingtan.employee.EmptyStringException;
+import in.lingtan.exceptions.EmptyStringException;
 
 public class StringValidator {
 

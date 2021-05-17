@@ -1,4 +1,4 @@
-package in.lingtan.employee;
+package in.lingtan.exceptions;
 
 public class InValidEmailIDException extends Exception {
 

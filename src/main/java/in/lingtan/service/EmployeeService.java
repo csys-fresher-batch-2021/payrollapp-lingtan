@@ -3,10 +3,10 @@ package in.lingtan.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.lingtan.employee.CannotRegisterEmployeeException;
-import in.lingtan.employee.ExistingEmployeeException;
-import in.lingtan.employee.InValidEmailIDException;
-import in.lingtan.employee.InvalidEmployeeIdException;
+import in.lingtan.exceptions.CannotRegisterEmployeeException;
+import in.lingtan.exceptions.ExistingEmployeeException;
+import in.lingtan.exceptions.InValidEmailIDException;
+import in.lingtan.exceptions.InvalidEmployeeIdException;
 import in.lingtan.model.Employee;
 import in.lingtan.util.EmailValidator;
 import in.lingtan.validator.EmployeeValidator;
@@ -84,17 +84,16 @@ public class EmployeeService {
 		String employeeIdCharacters;
 		String generatedEmployeeId;
 		String employeeIdDigits;
-		String firstName = employee.getFirstName();
+		String firstName = employee.getFirstName().trim();
 
 		if (firstName.length() <= 3) {
 			employeeIdCharacters = firstName.substring(0, 1).toUpperCase()
-					+ firstName.substring(1, 4) + employee.getLastName().substring(0, 1)
+					+ firstName.substring(1, 4) + employee.getLastName().trim().substring(0, 1)
 					+ employee.getDob().toString().substring(8, 10);
 		}else {
 			employeeIdCharacters = firstName.substring(0, 1).toUpperCase()
 					+ firstName.substring(1, 4) + employee.getDob().toString().substring(8, 10);
 		} 
-		
 		if ((employeeMap.size() == 0)) {
 			employeeIdDigits = "00" + Integer.toString(firstName.length());
 		} else if ((employeeMap.size() < 10) && (employeeMap.size() > 0)) {
@@ -123,8 +122,8 @@ public class EmployeeService {
 	 */
 
 	public static String generateEmail(Employee employee) {
-		String firstName = employee.getFirstName();
-		String lastName = employee.getLastName();
+		String firstName = employee.getFirstName().trim();
+		String lastName = employee.getLastName().trim();
 		return firstName.toLowerCase() + "." + lastName.toLowerCase().replaceAll("\\s", "")
 				+ employee.getEmployeeID().substring(4, 9) + ("@companyname.com");
 	

@@ -3,7 +3,7 @@ package in.lingtan.service;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import in.lingtan.employee.InvalidCredentialsException;
+import in.lingtan.exceptions.InvalidCredentialsException;
 
 public class UserServiceTestCase {
 
