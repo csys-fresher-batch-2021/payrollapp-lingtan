@@ -23,7 +23,7 @@ public class NumberValidator {
 	 * @throws InvalidLongNumberTypeException 
 	 */
 
-	public static Long isValidNumberOnly(String number, String errorMessage) throws ParseException, InvalidLongNumberTypeException {
+	public static Long isValidNumberOnly(String number, String errorMessage) throws InvalidLongNumberTypeException {
 
 		try {
 			return Long.parseLong(number);
