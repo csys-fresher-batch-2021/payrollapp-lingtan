@@ -1,8 +1,9 @@
 package in.lingtan.service;
 
-import java.util.HashMap;
+import java.sql.SQLException;
 import java.util.Map;
 
+import in.lingtan.dao.UserServiceDAO;
 import in.lingtan.exceptions.InvalidCredentialsException;
 
 
@@ -12,12 +13,6 @@ public class UserService {
 		//Default constructor
 	}
 
-	private static final Map<String, String> adminCredentialHashTable = new HashMap<>();
-
-	static {
-		adminCredentialHashTable.put("Ling12007", "@Lingtan1112");
-	}
-
 	/**
 	 * This method is used to validate the admin credentials that he is a valid
 	 * admin or not
@@ -25,13 +20,16 @@ public class UserService {
 	 * @param adminUsername
 	 * @param adminPassword
 	 * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @throws InvalidCredentialsException 
 	 */
-
-	public static boolean adminValidation(String adminUsername, String adminPassword)  {
-			
+	
+	public static boolean adminValidation(String adminUsername, String adminPassword) throws ClassNotFoundException, SQLException  {
+		UserServiceDAO userServiceDAO = new UserServiceDAO();
 		boolean isValidCredentials = false;
-		if (adminCredentialHashTable.containsKey(adminUsername) && adminPassword.equals(adminCredentialHashTable.get(adminUsername))) {
+		Map<String, String> userCredetials = userServiceDAO.adminCredentialData();
+		if (userCredetials.containsKey(adminUsername) && adminPassword.equals(userCredetials.get(adminUsername))) {
 			isValidCredentials =  true;
 		}
 		return isValidCredentials;
