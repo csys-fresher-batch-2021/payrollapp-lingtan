@@ -53,7 +53,7 @@ public class UserValidatorTestCase {
 				isValidEmployeeId = UserValidator.isValidEmployeeId(employeeId, "Invalid EmployeeID format or length");
 				assertTrue(isValidEmployeeId);
 			} catch (InvalidEmployeeIdException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			

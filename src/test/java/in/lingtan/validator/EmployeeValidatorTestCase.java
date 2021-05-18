@@ -25,7 +25,7 @@ public class EmployeeValidatorTestCase {
 			assertTrue(isAvailable);
 		} catch (ClassNotFoundException | ExistingEmployeeException | SQLException e) {
 		
-			e.printStackTrace();
+			
 		}
 		
 	
@@ -51,7 +51,7 @@ public class EmployeeValidatorTestCase {
 			assertTrue(isAvailable);
 		} catch (ClassNotFoundException | ExistingEmployeeException | SQLException e) {
 			
-			e.printStackTrace();
+			
 		}
 		
 	}	
