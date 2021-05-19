@@ -175,24 +175,32 @@ public class EmployeeServiceDAO {
 		Employee employee = new Employee();
 		Connection connection = ConnectionUtil.getConnection();
 		
-		String str = "select * from employee_data where employeeid=?";
-		PreparedStatement pst = connection.prepareStatement(str);	
-		pst.setString(1, employeeId);
-		ResultSet rs =  pst.executeQuery();
-		while(rs.next()) {
-			employee.setFirstName(rs.getString("firstname"));
-			employee.setName(rs.getString("name"));
-			employee.setEmployeeID(rs.getString("employeeid"));
-			employee.setMobileNumber(rs.getLong("mobilenumber"));
-			employee.setEmail(rs.getString("emailid"));
-			employee.setGender(rs.getString("gender"));
-			employee.setRole(rs.getString("role"));
-			employee.setDob(LocalDate.parse(rs.getString("dob")));
-			employee.setJoiningDate(LocalDate.parse(rs.getString("joineddate")));
-			
-			allEmployeeDataToDisplay.put(employee.getEmployeeID(),employee);
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			String str = "select * from employee_data where employeeid=?";
+			pst = connection.prepareStatement(str);	
+			pst.setString(1, employeeId);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				employee.setFirstName(rs.getString("firstname"));
+				employee.setName(rs.getString("name"));
+				employee.setEmployeeID(rs.getString("employeeid"));
+				employee.setMobileNumber(rs.getLong("mobilenumber"));
+				employee.setEmail(rs.getString("emailid"));
+				employee.setGender(rs.getString("gender"));
+				employee.setRole(rs.getString("role"));
+				employee.setDob(LocalDate.parse(rs.getString("dob")));
+				employee.setJoiningDate(LocalDate.parse(rs.getString("joineddate")));
+				
+				allEmployeeDataToDisplay.put(employee.getEmployeeID(),employee);
+			}
+		} catch (SQLException e) {
+			e.getMessage();
 		}
-		
+		finally {
+			ConnectionUtil.close(rs, pst, connection);
+		}
 		return allEmployeeDataToDisplay;
 	}	
 
