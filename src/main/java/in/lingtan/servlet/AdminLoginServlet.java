@@ -41,7 +41,6 @@ public class AdminLoginServlet extends HttpServlet {
 			if (isValidAdmin) {
 				HttpSession session = request.getSession();
 				session.setAttribute("ADMIN_ID", adminUsername);
-				session.setMaxInactiveInterval(1000);
 				response.sendRedirect("adminPortal.jsp");
 			}
 			else {

@@ -10,7 +10,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role
 				+ ", employeeID=" + employeeID + ", email=" + email + ", dob=" + dob + ", gender=" + gender
-				+ ", mobileNumber=" + mobileNumber + ", joiningData=" + joiningData + ", basicPay=" + basicPay
+				+ ", mobileNumber=" + mobileNumber + ", joiningData=" + joiningDate + ", basicPay=" + basicPay
 				+ ", salary=" + salary + ", pf=" + pf + ", attendance=" + attendance + ", present=" + present
 				+ ", absent=" + absent + ", attendanceStatusForADate=" + attendanceStatusForADate + ", attendanceMap="
 				+ attendanceMap + "]";
@@ -80,12 +80,12 @@ public class Employee {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public LocalDate getJoiningData() {
-		return joiningData;
+	public LocalDate getJoiningDate() {
+		return joiningDate;
 	}
 
-	public void setJoiningData(LocalDate joiningData) {
-		this.joiningData = joiningData;
+	public void setJoiningDate(LocalDate joiningData) {
+		this.joiningDate = joiningData;
 	}
 
 	public int getBasicPay() {
@@ -179,7 +179,7 @@ public class Employee {
 	private LocalDate dob;
 	private String gender;
 	private long mobileNumber;
-	private LocalDate joiningData;
+	private LocalDate joiningDate;
 	private int basicPay;
 	private double salary;
 	private double pf;

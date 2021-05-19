@@ -65,7 +65,7 @@ public class RegisterEmployeeServlet extends HttpServlet {
 			employee.setDob(parsedDob);
 			employee.setRole(role);
 			employee.setMobileNumber(validatedMobileNumber);
-			employee.setJoiningData(parsedJoinedDate);
+			employee.setJoiningDate(parsedJoinedDate);
 			employee.setGender(gender);
 			
 			EmployeeService employeeService = new EmployeeService();
