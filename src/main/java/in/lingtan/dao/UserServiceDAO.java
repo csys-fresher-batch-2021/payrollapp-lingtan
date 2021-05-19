@@ -28,7 +28,7 @@ public class UserServiceDAO {
 		Map<String, String> userCredetials = new HashMap<>();
 		
 		Connection connection = ConnectionUtil.getConnection();
-		System.out.println(connection);
+		
 		
 		String sql = "select * from user_service";
 		PreparedStatement pst = connection.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class UserServiceDAO {
 			String password = rs.getString("password");
 			userCredetials.put(username,password);
 		}
-		ConnectionUtil.close(connection);
+		ConnectionUtil.close(rs, pst,  connection);
 		
 		return userCredetials;
 	}

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import in.lingtan.model.Employee;
@@ -21,9 +20,9 @@ public class EmployeeServiceDAO {
 
 	public void addEmployee(Employee employee) throws ClassNotFoundException, SQLException {
 		Connection connection = ConnectionUtil.getConnection();
-		System.out.println(connection);
+		
 		String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender) values (?,?,?,?,?,?,?,?,?,?,?)";
-		System.out.println(sql);
+	
 
 		PreparedStatement pst = connection.prepareStatement(sql);
 		pst.setString(1, employee.getFirstName());
@@ -37,15 +36,11 @@ public class EmployeeServiceDAO {
 		pst.setObject(9, employee.getJoiningData());
 		pst.setString(10, employee.getPassword());
 		pst.setString(11, employee.getGender());
+
+		pst.executeUpdate();
+
+		ConnectionUtil.close(pst, connection);
 		
-		System.out.println("inserted note");
-
-		int rows = pst.executeUpdate();
-
-		System.out.println("No of rows inserted :" + rows);
-
-		ConnectionUtil.close(connection);
-
 	}
 	
 	/**
@@ -58,15 +53,16 @@ public class EmployeeServiceDAO {
 	public int tableSize() throws ClassNotFoundException, SQLException {
 		
 		Connection connection = ConnectionUtil.getConnection();
-		System.out.println(connection);
+		
 
-		String str1 = "select count(*) from employee_data";
-		PreparedStatement pst1 = connection.prepareStatement(str1);
-		ResultSet rs = pst1.executeQuery();
+		String str = "select count(*) from employee_data";
+		PreparedStatement pst = connection.prepareStatement(str);
+		ResultSet rs = pst.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
 
-		ConnectionUtil.close(connection);
+		ConnectionUtil.close(rs, pst, connection);
+		
 		return count;
 	}
 
@@ -81,8 +77,7 @@ public class EmployeeServiceDAO {
 	
 	public Map<Long, String> isEmployeeNotAvailableInDAO() throws ClassNotFoundException, SQLException {
 		Connection connection = ConnectionUtil.getConnection();
-		System.out.println(connection);
-
+		
 		Map<Long, String> existingEmployeeCheck = new HashMap<>();
 
 		String str1 = "select lastname from employee_data";
@@ -101,6 +96,9 @@ public class EmployeeServiceDAO {
 
 			existingEmployeeCheck.put(mobilenumber, lastname);
 		}
+		rs1.close();
+		pst1.close();
+		ConnectionUtil.close(rs2,pst2,connection);
 		return existingEmployeeCheck;
 
 	}
@@ -117,13 +115,16 @@ public class EmployeeServiceDAO {
 		Connection connection = ConnectionUtil.getConnection();
 		
 		String str = "select * from employee_data";
+		
 		PreparedStatement pst1 = connection.prepareStatement(str);	
+		
 		ResultSet rs =  pst1.executeQuery();
 		while(rs.next()) {
 			String employeeName = rs.getString("firstname");
 			String employeeId = rs.getString("employeeid");
 			allEmployeeDataToDisplay.put(employeeId, employeeName);
 		}
+		ConnectionUtil.close(rs, pst1, connection);
 		return allEmployeeDataToDisplay;
 	}
 	
