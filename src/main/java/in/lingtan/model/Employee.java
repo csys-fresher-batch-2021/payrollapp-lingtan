@@ -9,11 +9,11 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role
-				+ ", employeeID=" + employeeID + ", email=" + email + ", dob=" + dob + ", gender=" + gender
-				+ ", mobileNumber=" + mobileNumber + ", joiningData=" + joiningDate + ", basicPay=" + basicPay
-				+ ", salary=" + salary + ", pf=" + pf + ", attendance=" + attendance + ", present=" + present
-				+ ", absent=" + absent + ", attendanceStatusForADate=" + attendanceStatusForADate + ", attendanceMap="
-				+ attendanceMap + "]";
+				+ ", employeeID=" + employeeID + ", password=" + password + ", email=" + email + ", dob=" + dob
+				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", joiningDate=" + joiningDate
+				+ ", activeStatus=" + activeStatus + ", basicPay=" + basicPay + ", salary=" + salary + ", pf=" + pf
+				+ ", attendance=" + attendance + ", present=" + present + ", absent=" + absent
+				+ ", attendanceStatusForADate=" + attendanceStatusForADate + ", attendanceMap=" + attendanceMap + "]";
 	}
 
 	public String getFirstName() {
@@ -169,6 +169,15 @@ public class Employee {
 	}
 
 
+	public int getActiveStatus() {
+		return activeStatus;
+	}
+
+	public void setActiveStatus(int activeStatus) {
+		this.activeStatus = activeStatus;
+	}
+
+
 	private String name;
 	private String firstName;
 	private String lastName;
@@ -180,6 +189,7 @@ public class Employee {
 	private String gender;
 	private long mobileNumber;
 	private LocalDate joiningDate;
+	private int activeStatus;
 	private int basicPay;
 	private double salary;
 	private double pf;

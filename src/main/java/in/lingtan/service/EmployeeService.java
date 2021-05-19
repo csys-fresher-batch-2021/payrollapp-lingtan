@@ -132,6 +132,20 @@ public class EmployeeService {
 	}
 	
 	/**
+	 * This method deletes("makes the employee inactive") from viewing screen
+	 * @param employeeId
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean deleteEmployeeFromTheDataBase(String employeeId) throws ClassNotFoundException, SQLException { 
+		return employeeServiceDAO.deleteEmployeeFromTable(employeeId);
+			
+		
+		
+	}
+	
+	/**
 	 * This method returns a hashmap of allt the employee names and their employee ID available in the database.
 	 * @return
 	 * @throws ClassNotFoundException
@@ -147,6 +161,8 @@ public class EmployeeService {
 		
 		return employeeServiceDAO.displayDetailOfAnIndividualEmployee(employeeId);
 	}
+
+
 	
 	
 	

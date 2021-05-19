@@ -13,9 +13,9 @@ public class EmployeeValidator {
 		// Default Constructor.
 	}
 
-	
 	/**
 	 * This method verifies whether an employee is already registered or not.
+	 * 
 	 * @param employee
 	 * @return
 	 * @throws ExistingEmployeeException
@@ -27,18 +27,26 @@ public class EmployeeValidator {
 
 		boolean isAvailable = true;
 		EmployeeServiceDAO employeeServiceDAO = new EmployeeServiceDAO();
-		Map<Long, String> employeeMap = employeeServiceDAO.isEmployeeNotAvailableInDAO();
-		for (Map.Entry<Long, String> employeeMapSet : employeeMap.entrySet()) {
+		Map<Long, Employee> employeeMap = employeeServiceDAO.isEmployeeNotAvailableInDAO();
+		for (Map.Entry<Long, Employee> employeeMapSet : employeeMap.entrySet()) {
 
 			if (employeeMapSet.getKey() == (employee.getMobileNumber())
-					&& (employeeMapSet.getValue().toLowerCase().replaceAll("\\s", "")
-							.equalsIgnoreCase(employee.getLastName().toLowerCase().replaceAll("\\s", "")))) {
-				throw new ExistingEmployeeException(employee.getName() + " - Already registered");
-
+					&& (employeeMapSet.getValue().getLastName().toLowerCase().replaceAll("\\s", "")
+					.equalsIgnoreCase(employee.getLastName().toLowerCase().replaceAll("\\s", "")))
+					) {
+				if
+					(employeeMapSet.getValue().getActiveStatus() == 1) {
+					throw new ExistingEmployeeException(employee.getName() + " - Already registered");
+				
+				} else {
+					throw new ExistingEmployeeException(employee.getName() + " - Already available in Database do you want to activate");
+				}
 			} else {
 				isAvailable = true;
 			}
 		}
+		System.out.println(isAvailable);
 		return isAvailable;
 	}
 }
+//
