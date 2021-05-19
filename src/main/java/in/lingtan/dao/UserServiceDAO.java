@@ -26,18 +26,27 @@ public class UserServiceDAO {
 	public Map<String, String>  adminCredentialData() throws ClassNotFoundException, SQLException {
 		
 		Map<String, String> userCredetials = new HashMap<>();
-		
-		Connection connection = ConnectionUtil.getConnection();
-		
-		
-		String sql = "select * from user_service";
-		PreparedStatement pst = connection.prepareStatement(sql);
-		ResultSet rs = pst.executeQuery();
-		
-		while(rs.next()) {
-			String username = rs.getString("username");
-			String password = rs.getString("password");
-			userCredetials.put(username,password);
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			userCredetials = new HashMap<>();
+			
+			connection = ConnectionUtil.getConnection();
+			
+			
+			String sql = "select * from user_service";
+			pst = connection.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				userCredetials.put(username,password);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.getMessage();
 		}
 		ConnectionUtil.close(rs, pst,  connection);
 		

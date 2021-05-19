@@ -44,7 +44,7 @@ public class EmployeeServiceDAO {
 
 			pst.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
+			e.getMessage();
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
@@ -76,7 +76,7 @@ public class EmployeeServiceDAO {
 			count = rs.getInt(1);
 		} catch (ClassNotFoundException | SQLException e) {
 
-			e.printStackTrace();
+			e.getMessage();
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
@@ -116,7 +116,7 @@ public class EmployeeServiceDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 
-			e.printStackTrace();
+			e.getMessage();
 		}
 
 		finally {
@@ -154,7 +154,7 @@ public class EmployeeServiceDAO {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 
-			e.printStackTrace();
+			e.getMessage();
 		} finally {
 			ConnectionUtil.close(rs, pst1, connection);
 		}
