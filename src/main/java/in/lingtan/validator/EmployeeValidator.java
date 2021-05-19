@@ -45,7 +45,6 @@ public class EmployeeValidator {
 				isAvailable = true;
 			}
 		}
-		System.out.println(isAvailable);
 		return isAvailable;
 	}
 }

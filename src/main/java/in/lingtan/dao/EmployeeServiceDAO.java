@@ -129,7 +129,7 @@ public class EmployeeServiceDAO {
 		finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
-		System.out.println(existingEmployeeCheck);
+	
 		return existingEmployeeCheck;
 
 	}
@@ -211,6 +211,13 @@ public class EmployeeServiceDAO {
 		return allEmployeeDataToDisplay;
 	}
 
+	/**
+	 * This method is used to make an employee inactive thereby not getting displayed in the screen in the list of employees.
+	 * @param employeeId
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public boolean deleteEmployeeFromTable(String employeeId) throws ClassNotFoundException, SQLException {
 		
 		Connection connection = null;
