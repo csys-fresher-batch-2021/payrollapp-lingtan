@@ -48,7 +48,7 @@
 					<td><%=employeeId.getKey()%></td>
 					<td><%=employeeId.getValue()%></td>
 					<td><a
-						href="DisplayEmployeeServlet?employeeId=<%=employeeId.getKey()%>">View
+						href="displayIndividualEmployeeData.jsp?employeeId=<%=employeeId.getKey()%>">View
 							Details</a></td>
 					<td><a
 						href="deleteEmployee.jsp?employeeId=<%=employeeId.getValue()%>">Delete

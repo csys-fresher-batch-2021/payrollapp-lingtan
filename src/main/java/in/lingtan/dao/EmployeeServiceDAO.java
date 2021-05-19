@@ -22,7 +22,7 @@ public class EmployeeServiceDAO {
 	public void addEmployee(Employee employee) throws ClassNotFoundException, SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		System.out.println(connection);
-		String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password) values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender) values (?,?,?,?,?,?,?,?,?,?,?)";
 		System.out.println(sql);
 
 		PreparedStatement pst = connection.prepareStatement(sql);
@@ -36,6 +36,7 @@ public class EmployeeServiceDAO {
 		pst.setObject(8, employee.getDob());
 		pst.setObject(9, employee.getJoiningData());
 		pst.setString(10, employee.getPassword());
+		pst.setString(11, employee.getGender());
 		
 		System.out.println("inserted note");
 
@@ -126,5 +127,6 @@ public class EmployeeServiceDAO {
 		return allEmployeeDataToDisplay;
 	}
 	
+		
 		
 }

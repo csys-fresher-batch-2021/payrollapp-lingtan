@@ -141,8 +141,8 @@ public class EmployeeService {
 	public Map<String, String> displayAllEmployees() throws ClassNotFoundException, SQLException{
 		return employeeServiceDAO.displayAllEmployees();
 		
-		
 	}
+	
 	
 	
 
