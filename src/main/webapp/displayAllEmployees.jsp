@@ -15,6 +15,14 @@
 	<main class="container-fluid">
 
 		<h3>Employees in the Company</h3>
+		
+		<%
+		String infoMessage = request.getParameter("infoMessage");
+		if(infoMessage!=null){
+			out.println("<p style=color:green>"+infoMessage+"</p>");
+		}
+		
+		%>
 
 		<%
 		EmployeeService employeeService = new EmployeeService();
@@ -51,7 +59,7 @@
 						href="displayIndividualEmployeeData.jsp?employeeId=<%=employeeId.getKey()%>">View
 							Details</a></td>
 					<td><a
-						href="deleteEmployee.jsp?employeeId=<%=employeeId.getValue()%>">Delete
+						href="DeleteEmployeeServlet?employeeId=<%=employeeId.getKey()%>">Delete
 							ID</a></td>
 				</tr>
 				<%

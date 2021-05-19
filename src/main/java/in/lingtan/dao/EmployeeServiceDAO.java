@@ -27,7 +27,7 @@ public class EmployeeServiceDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 
-			String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender) values (?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender,activestatus) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			pst = connection.prepareStatement(sql);
 
@@ -42,8 +42,10 @@ public class EmployeeServiceDAO {
 			pst.setObject(9, employee.getJoiningDate());
 			pst.setString(10, employee.getPassword());
 			pst.setString(11, employee.getGender());
+			pst.setInt(12, 1);
 
 			pst.executeUpdate();
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.getMessage();
 		} finally {
@@ -95,10 +97,11 @@ public class EmployeeServiceDAO {
 	 * @throws SQLException
 	 */
 
-	public Map<Long, String> isEmployeeNotAvailableInDAO() throws ClassNotFoundException, SQLException {
-
+	public Map<Long, Employee> isEmployeeNotAvailableInDAO() throws ClassNotFoundException, SQLException {
+		
+		
 		Connection connection = null;
-		Map<Long, String> existingEmployeeCheck = new HashMap<>();
+		Map<Long, Employee> existingEmployeeCheck = new HashMap<>();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
@@ -110,10 +113,13 @@ public class EmployeeServiceDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				String lastname = rs.getString("lastname");
-				long mobilenumber = rs.getLong("mobilenumber");
+				Employee employee = new Employee();
+				employee.setLastName(rs.getString("lastname"));
+				employee.setMobileNumber(rs.getLong("mobilenumber"));
+				employee.setActiveStatus(rs.getInt("activestatus"));
 
-				existingEmployeeCheck.put(mobilenumber, lastname);
+				existingEmployeeCheck.put(employee.getMobileNumber(), employee);
+				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 
@@ -123,6 +129,7 @@ public class EmployeeServiceDAO {
 		finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
+	
 		return existingEmployeeCheck;
 
 	}
@@ -144,7 +151,7 @@ public class EmployeeServiceDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 
-			String str = "select * from employee_data";
+			String str = "select * from employee_data where activestatus=1";
 			pst1 = connection.prepareStatement(str);
 			rs = pst1.executeQuery();
 
@@ -202,7 +209,42 @@ public class EmployeeServiceDAO {
 			ConnectionUtil.close(rs, pst, connection);
 		}
 		return allEmployeeDataToDisplay;
+	}
+
+	/**
+	 * This method is used to make an employee inactive thereby not getting displayed in the screen in the list of employees.
+	 * @param employeeId
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean deleteEmployeeFromTable(String employeeId) throws ClassNotFoundException, SQLException {
+		
+		Connection connection = null;
+		PreparedStatement pst = null;
+		
+		boolean isDeleted = false;
+		try {
+			connection = ConnectionUtil.getConnection();
+
+			String str = "update employee_data set activestatus=0 where employeeid=?";
+			pst = connection.prepareStatement(str);
+			pst.setString(1, employeeId);
+			pst.executeUpdate();
+			isDeleted = true;
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+		}
+		finally {
+			ConnectionUtil.close(pst, connection);
+		}
+		return isDeleted;
+		
 	}	
+	
 
 
 }
