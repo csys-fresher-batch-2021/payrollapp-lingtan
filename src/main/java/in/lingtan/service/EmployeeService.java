@@ -143,6 +143,11 @@ public class EmployeeService {
 		
 	}
 	
+	public Map<String, Employee> displayIndividualEmployeeData(String employeeId) throws ClassNotFoundException, SQLException{
+		
+		return employeeServiceDAO.displayDetailOfAnIndividualEmployee(employeeId);
+	}
+	
 	
 	
 

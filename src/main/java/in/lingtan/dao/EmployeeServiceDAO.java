@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import in.lingtan.model.Employee;
@@ -38,7 +39,7 @@ public class EmployeeServiceDAO {
 			pst.setString(6, employee.getEmail());
 			pst.setString(7, employee.getEmployeeID());
 			pst.setObject(8, employee.getDob());
-			pst.setObject(9, employee.getJoiningData());
+			pst.setObject(9, employee.getJoiningDate());
 			pst.setString(10, employee.getPassword());
 			pst.setString(11, employee.getGender());
 
@@ -160,5 +161,40 @@ public class EmployeeServiceDAO {
 		}
 		return allEmployeeDataToDisplay;
 	}
+	
+	/**
+	 * This method gives a map of individual employee data of a particular employee in the database.
+	 * @param employeeId
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public Map<String, Employee> displayDetailOfAnIndividualEmployee(String employeeId) throws ClassNotFoundException, SQLException {
+		Map<String, Employee> allEmployeeDataToDisplay = new HashMap<>(); 
+		
+		Employee employee = new Employee();
+		Connection connection = ConnectionUtil.getConnection();
+		
+		String str = "select * from employee_data where employeeid=?";
+		PreparedStatement pst = connection.prepareStatement(str);	
+		pst.setString(1, employeeId);
+		ResultSet rs =  pst.executeQuery();
+		while(rs.next()) {
+			employee.setFirstName(rs.getString("firstname"));
+			employee.setName(rs.getString("name"));
+			employee.setEmployeeID(rs.getString("employeeid"));
+			employee.setMobileNumber(rs.getLong("mobilenumber"));
+			employee.setEmail(rs.getString("emailid"));
+			employee.setGender(rs.getString("gender"));
+			employee.setRole(rs.getString("role"));
+			employee.setDob(LocalDate.parse(rs.getString("dob")));
+			employee.setJoiningDate(LocalDate.parse(rs.getString("joineddate")));
+			
+			allEmployeeDataToDisplay.put(employee.getEmployeeID(),employee);
+		}
+		
+		return allEmployeeDataToDisplay;
+	}	
+
 
 }
