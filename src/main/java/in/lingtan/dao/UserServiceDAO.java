@@ -48,8 +48,9 @@ public class UserServiceDAO {
 
 			e.getMessage();
 		}
-		ConnectionUtil.close(rs, pst,  connection);
-		
+		finally {
+			ConnectionUtil.close(rs, pst,  connection);
+		}		
 		return userCredetials;
 	}
 	
