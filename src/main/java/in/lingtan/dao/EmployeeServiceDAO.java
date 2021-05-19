@@ -20,12 +20,16 @@ public class EmployeeServiceDAO {
 	 */
 
 	public void addEmployee(Employee employee) throws ClassNotFoundException, SQLException {
-		Connection connection = ConnectionUtil.getConnection();
 
-		String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender) values (?,?,?,?,?,?,?,?,?,?,?)";
-
-		PreparedStatement pst = connection.prepareStatement(sql);
+		Connection connection = null;
+		PreparedStatement pst = null;
 		try {
+			connection = ConnectionUtil.getConnection();
+
+			String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender) values (?,?,?,?,?,?,?,?,?,?,?)";
+
+			pst = connection.prepareStatement(sql);
+
 			pst.setString(1, employee.getFirstName());
 			pst.setString(2, employee.getLastName());
 			pst.setString(3, employee.getName());
@@ -39,10 +43,11 @@ public class EmployeeServiceDAO {
 			pst.setString(11, employee.getGender());
 
 			pst.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(pst, connection);
 		}
-
 	}
 
 	/**
@@ -54,18 +59,24 @@ public class EmployeeServiceDAO {
 	 */
 
 	public int tableSize() throws ClassNotFoundException, SQLException {
-		int count;
 
-		Connection connection = ConnectionUtil.getConnection();
-
-		String str = "select count(*) from employee_data";
-
-		PreparedStatement pst = connection.prepareStatement(str);
-		ResultSet rs = pst.executeQuery();
-
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		int count = 0;
 		try {
+			connection = ConnectionUtil.getConnection();
+
+			String str = "select count(*) from employee_data";
+
+			pst = connection.prepareStatement(str);
+			rs = pst.executeQuery();
+
 			rs.next();
 			count = rs.getInt(1);
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
@@ -84,32 +95,32 @@ public class EmployeeServiceDAO {
 	 */
 
 	public Map<Long, String> isEmployeeNotAvailableInDAO() throws ClassNotFoundException, SQLException {
-		Connection connection = ConnectionUtil.getConnection();
 
+		Connection connection = null;
 		Map<Long, String> existingEmployeeCheck = new HashMap<>();
-
-		String str1 = "select lastname from employee_data";
-		PreparedStatement pst1 = connection.prepareStatement(str1);
-
-		String str2 = "select mobilenumber from employee_data";
-		PreparedStatement pst2 = connection.prepareStatement(str2);
-
-		ResultSet rs1 = pst1.executeQuery();
-		ResultSet rs2 = pst2.executeQuery();
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		try {
+			connection = ConnectionUtil.getConnection();
+			existingEmployeeCheck = new HashMap<>();
 
-			while (rs1.next() && rs2.next()) {
+			String str = "select * from employee_data";
+			pst = connection.prepareStatement(str);
+			rs = pst.executeQuery();
 
-				String lastname = rs1.getString("lastname");
-				long mobilenumber = rs2.getLong("mobilenumber");
+			while (rs.next()) {
+				String lastname = rs.getString("lastname");
+				long mobilenumber = rs.getLong("mobilenumber");
 
 				existingEmployeeCheck.put(mobilenumber, lastname);
 			}
-		} finally {
+		} catch (ClassNotFoundException | SQLException e) {
 
-			rs1.close();
-			pst1.close();
-			ConnectionUtil.close(rs2, pst2, connection);
+			e.printStackTrace();
+		}
+
+		finally {
+			ConnectionUtil.close(rs, pst, connection);
 		}
 		return existingEmployeeCheck;
 
@@ -124,19 +135,26 @@ public class EmployeeServiceDAO {
 	 * @throws SQLException
 	 */
 	public Map<String, String> displayAllEmployees() throws ClassNotFoundException, SQLException {
+
 		Map<String, String> allEmployeeDataToDisplay = new HashMap<>();
-
-		Connection connection = ConnectionUtil.getConnection();
-
-		String str = "select * from employee_data";
-		PreparedStatement pst1 = connection.prepareStatement(str);
-		ResultSet rs = pst1.executeQuery();
+		Connection connection = null;
+		PreparedStatement pst1 = null;
+		ResultSet rs = null;
 		try {
+			connection = ConnectionUtil.getConnection();
+
+			String str = "select * from employee_data";
+			pst1 = connection.prepareStatement(str);
+			rs = pst1.executeQuery();
+
 			while (rs.next()) {
 				String employeeName = rs.getString("firstname");
 				String employeeId = rs.getString("employeeid");
 				allEmployeeDataToDisplay.put(employeeId, employeeName);
 			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
 		} finally {
 			ConnectionUtil.close(rs, pst1, connection);
 		}
