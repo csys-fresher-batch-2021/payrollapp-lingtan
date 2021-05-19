@@ -1,8 +1,9 @@
 package in.lingtan.service;
 
-import java.util.HashMap;
+import java.sql.SQLException;
 import java.util.Map;
 
+import in.lingtan.dao.EmployeeServiceDAO;
 import in.lingtan.exceptions.CannotRegisterEmployeeException;
 import in.lingtan.exceptions.ExistingEmployeeException;
 import in.lingtan.exceptions.InValidEmailIDException;
@@ -14,21 +15,15 @@ import in.lingtan.validator.UserValidator;
 
 public class EmployeeService {
 
-	private static final HashMap<String, Employee> employeeMap = new HashMap<>();
-	private static final HashMap<String, String> masterCredentialStorage = new HashMap<>();
 
-	private EmployeeService() {
+
+	public EmployeeService() {
 		// Default constructor.
 	}
+	
+	private final EmployeeServiceDAO employeeServiceDAO = new EmployeeServiceDAO();
+	
 
-	/**
-	 * This Method displays the hashMap that stores the employee data
-	 * 
-	 * @return
-	 */
-	public static Map<String, Employee> getAllEmployees() {
-		return employeeMap;
-	}
 
 	/**
 	 * To add the details of an Employee into a hashmap where the employeeId is the
@@ -40,23 +35,26 @@ public class EmployeeService {
 	 * @throws InvalidEmployeeIdException 
 	 * @throws InValidEmailIDException 
 	 * @throws ExistingEmployeeException 
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static boolean addEmployee(Employee employee) throws CannotRegisterEmployeeException, InvalidEmployeeIdException, InValidEmailIDException, ExistingEmployeeException {
+	public boolean addEmployee(Employee employee) throws CannotRegisterEmployeeException, InvalidEmployeeIdException, InValidEmailIDException, ExistingEmployeeException, ClassNotFoundException, SQLException {
 
-	
-
-		String generatedEmployeeId = EmployeeService.generateEmployeeId(employee);
+		int employeeTableSize = employeeServiceDAO.tableSize();
+		
+		String generatedEmployeeId = generateEmployeeId(employee, employeeTableSize);
 		UserValidator.isValidEmployeeId(generatedEmployeeId, "Invalid Employee ID");
 		employee.setEmployeeID(generatedEmployeeId);
 
-		String generatedEmailId = EmployeeService.generateEmail(employee);
+		String generatedEmailId = generateEmail(employee);
 		EmailValidator.isValidEmailId(generatedEmailId, "Invalid Email-ID");
 		employee.setEmail(generatedEmailId);
+		employee.setPassword("@Password123");
+		
 		boolean isEmployeeAvailable = EmployeeValidator.isEmployeeNotAvailable(employee);
 		
 		if (isEmployeeAvailable) {
-			employeeMap.put(employee.getEmployeeID(), employee);
-			masterCredentialStorage.put(employee.getEmployeeID(), "@password123");
+			employeeServiceDAO.addEmployee(employee);
 			return true;
 		} else {
 			throw new CannotRegisterEmployeeException("Cannot add employee");
@@ -74,33 +72,37 @@ public class EmployeeService {
 	 * length four where the first 2 digits are their date of birth the -next two
 	 * numbers are the order of their joining list of employees and the last number
 	 * is the employee name's length.
+	 * @param employeeTableSize 
 	 * 
 	 * @param name
 	 * @param dob
 	 * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static String generateEmployeeId(Employee employee) {
+	public String generateEmployeeId(Employee employee, int employeeTableSize) {
 
 		String employeeIdCharacters;
 		String generatedEmployeeId;
 		String employeeIdDigits;
 		String firstName = employee.getFirstName().trim();
+		
 
 		if (firstName.length() <= 3) {
 			employeeIdCharacters = firstName.substring(0, 1).toUpperCase()
-					+ firstName.substring(1, 4) + employee.getLastName().trim().substring(0, 1)
+					+ firstName.substring(1, 3) + employee.getLastName().trim().substring(0, 1)
 					+ employee.getDob().toString().substring(8, 10);
 		}else {
 			employeeIdCharacters = firstName.substring(0, 1).toUpperCase()
 					+ firstName.substring(1, 4) + employee.getDob().toString().substring(8, 10);
 		} 
-		if ((employeeMap.size() == 0)) {
+		if ((employeeTableSize == 0)) {
 			employeeIdDigits = "00" + Integer.toString(firstName.length());
-		} else if ((employeeMap.size() < 10) && (employeeMap.size() > 0)) {
-			employeeIdDigits = "0" + Integer.toString(employeeMap.size())
+		} else if ((employeeTableSize < 10) && (employeeTableSize > 0)) {
+			employeeIdDigits = "0" + Integer.toString(employeeTableSize)
 					+ Integer.toString(firstName.length());
 		} else {
-			employeeIdDigits = Integer.toString(employeeMap.size())
+			employeeIdDigits = Integer.toString(employeeTableSize)
 					+ Integer.toString(firstName.length());
 		}
 		generatedEmployeeId = employeeIdCharacters + employeeIdDigits;
@@ -121,12 +123,28 @@ public class EmployeeService {
 	 * @return
 	 */
 
-	public static String generateEmail(Employee employee) {
+	public String generateEmail(Employee employee) {
 		String firstName = employee.getFirstName().trim();
 		String lastName = employee.getLastName().trim();
 		return firstName.toLowerCase() + "." + lastName.toLowerCase().replaceAll("\\s", "")
 				+ employee.getEmployeeID().substring(4, 9) + ("@companyname.com");
 	
 	}
+	
+	/**
+	 * This method returns a hashmap of allt the employee names and their employee ID available in the database.
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	
+	public Map<String, String> displayAllEmployees() throws ClassNotFoundException, SQLException{
+		return employeeServiceDAO.displayAllEmployees();
+		
+	}
+	
+	
+	
+
 
 }

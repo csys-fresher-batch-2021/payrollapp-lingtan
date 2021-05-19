@@ -84,9 +84,8 @@
 			<a href="registerEmployee.jsp" class="btn btn-danger">Reset</a>
 		</div>
 
-		<div class="col">	
-			<a href="index.jsp" class="btn btn-primary">Back to Login</a>
-		
+		<div class="form-group col-md-2">
+			<a href="adminPortal.jsp" class="btn btn-primary">Back to Portal</a>
 		</div>
 	</div>
 	

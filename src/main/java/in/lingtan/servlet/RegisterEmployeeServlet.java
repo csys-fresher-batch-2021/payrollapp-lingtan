@@ -67,8 +67,11 @@ public class RegisterEmployeeServlet extends HttpServlet {
 			employee.setMobileNumber(validatedMobileNumber);
 			employee.setJoiningData(parsedJoinedDate);
 			employee.setGender(gender);
+			
+			EmployeeService employeeService = new EmployeeService();
+		
+			boolean isAddedEmployee = employeeService.addEmployee(employee);
 
-			boolean isAddedEmployee = EmployeeService.addEmployee(employee);
 
 			if (isAddedEmployee) {
 				String successMessage = "Successfully Registered";

@@ -7,30 +7,77 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<br/>
+		<div class="d-flex justify-content-center">
+		
+		<div class="md=5 row">
+		
+				<h3 >ADMIN LOGIN PORTAL</h3>
+			</div>
+		</div><br>
 
-
-		<h2>Welcome</h2>
-		<h3>
-			<strong>Admin Login portal</strong>
-		</h3>
-		<form action="AdminLogin" method="post">
-
-			<input type="text" name="adminUsername" id="adminUsername" placeholder="Employee ID" required autofocus><br /> <br />
-			<input type="password" name="adminPassword" id="adminPassword"	placeholder="password" required><br />
+		<form id= "loginForm" action="AdminLogin" method="post" onclick=login() >
+		<div class="d-flex justify-content-center">
+			<div class="mb-4 col-5">
+				<input type="text" name="adminUsername" id="adminUsername" class="form-control form-control-sm" placeholder="Employee ID" required autofocus>
+				<div class = "invalid-feedback"> Please enter an Employee ID</div>
+		</div>	
+		</div>
+		<div class="d-flex justify-content-center">
+			<div class="mb-2 col-5">
+				<input type="password" name="adminPassword" id="adminPassword" class="form-control form-control-sm"	placeholder="password" required>
+				<div class = "invalid-feedback"> Please Enter a password</div>
+			</div>	
+		</div>
+		<div class="d-flex justify-content-center">
+		<div class="md=2 row">
 			<%
 			final String errorMessage = request.getParameter("errorMessage");
 			if (errorMessage != null) {
 				out.println("<font color='red'>" + errorMessage + "</font>");
 			}
 			%>
-			<br />
-
-			<button class="btn btn-primary">Login</button>
-			<br>
-
+		</div>
+		</div><br/>
+			
+		
+		
+			<div class=" d-flex justify-content-center">
+				<div class="md=4 row">
+					<button class="btn btn-primary" class="form-control form-control-sm">Login</button>
+				</div>
+			</div><br/>
+			<div class="d-flex justify-content-center">
+				<div class="md=2 row">
+					<br> <a href="index.jsp" >Employee Login</a>
+				</div>
+			</div>
+	<script type="text/javascript">
+		function login(){
+			let loginForm = document.querySelector("#loginForm");
+			let adminUsername = document.querySelector("#adminUsername");
+			let adminPassword = document.querySelector("#adminPassword");
+			if(loginForm.checkValidity()){
+				loginForm.classList.remove("was-validated");
+				loginForm.submit(); 
+			} else {
+				loginForm.classList.add("was-validated"); 
+			}
+					
+			if (username.value.length == 0) {
+				username.classList.add("is-invalid");
+			}
+			else{
+				username.classList.add("is-valid");
+			}
+					
+		}
+			
+			
+			</script>
 
 		</form>
-		<br> <a href="index.jsp">Employee Login</a>
+		
 	</main>
 </body>
 </html>

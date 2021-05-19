@@ -159,12 +159,22 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	private String name;
 	private String firstName;
 	private String lastName;
 	private String role;
 	private String employeeID;
+	private String password;
 	private String email;
 	private LocalDate dob;
 	private String gender;
