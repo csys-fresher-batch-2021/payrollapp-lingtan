@@ -41,7 +41,7 @@ public class EmployeeService {
 	public boolean addEmployee(Employee employee) throws CannotRegisterEmployeeException, InvalidEmployeeIdException, InValidEmailIDException, ExistingEmployeeException, ClassNotFoundException, SQLException {
 
 		int employeeTableSize = employeeServiceDAO.tableSize();
-		System.out.println("size"+employeeTableSize);
+		
 		String generatedEmployeeId = generateEmployeeId(employee, employeeTableSize);
 		UserValidator.isValidEmployeeId(generatedEmployeeId, "Invalid Employee ID");
 		employee.setEmployeeID(generatedEmployeeId);
@@ -52,7 +52,7 @@ public class EmployeeService {
 		employee.setPassword("@Password123");
 		
 		boolean isEmployeeAvailable = EmployeeValidator.isEmployeeNotAvailable(employee);
-		System.out.println(isEmployeeAvailable);
+		
 		if (isEmployeeAvailable) {
 			employeeServiceDAO.addEmployee(employee);
 			return true;
