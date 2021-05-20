@@ -1,6 +1,8 @@
 package in.lingtan.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +27,8 @@ public class LogoutServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			session.invalidate();
-			response.sendRedirect("index.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
+			rd.forward(request, response);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

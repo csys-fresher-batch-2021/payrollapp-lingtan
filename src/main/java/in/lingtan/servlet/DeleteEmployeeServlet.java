@@ -3,6 +3,7 @@ package in.lingtan.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,14 +38,15 @@ public class DeleteEmployeeServlet extends HttpServlet {
 		try {
 			boolean isRemoved = employeeService.deleteEmployeeFromTheDataBase(employeeId);
 			if(isRemoved) {
-				response.sendRedirect("displayAllEmployees.jsp?infoMessage=SuccessFully Deleted Employee-"+employeeId);
+				RequestDispatcher rd=request.getRequestDispatcher("displayAllEmployees.jsp?infoMessage=SuccessFully Deleted Employee-"+employeeId);  
+				rd.forward(request, response);
 			}
 			else {
-				response.sendRedirect("displayAllEmployees.jsp?errorMessage=Cannot Delete Employee-"+employeeId);
+				RequestDispatcher rd=request.getRequestDispatcher("displayAllEmployees.jsp?errorMessage=Cannot Delete Employee-"+employeeId);  
+				rd.forward(request, response);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			
-			e.printStackTrace();
 		}
 		
 		
