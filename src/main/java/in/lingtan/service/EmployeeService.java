@@ -10,8 +10,8 @@ import in.lingtan.exceptions.InValidEmailIDException;
 import in.lingtan.exceptions.InvalidEmployeeIdException;
 import in.lingtan.model.Employee;
 import in.lingtan.util.EmailValidator;
-import in.lingtan.validator.EmployeeValidator;
-import in.lingtan.validator.UserValidator;
+import in.lingtan.validator.EmployeeServiceValidator;
+import in.lingtan.validator.UserServiceValidator;
 
 public class EmployeeService {
 
@@ -42,8 +42,10 @@ public class EmployeeService {
 
 		int employeeTableSize = employeeServiceDAO.tableSize();
 		
+		boolean isEmployeeAvailable = EmployeeServiceValidator.isEmployeeNotAvailable(employee);
+		
 		String generatedEmployeeId = generateEmployeeId(employee, employeeTableSize);
-		UserValidator.isValidEmployeeId(generatedEmployeeId, "Invalid Employee ID");
+		UserServiceValidator.isValidEmployeeId(generatedEmployeeId, "Invalid Employee ID");
 		employee.setEmployeeID(generatedEmployeeId);
 
 		String generatedEmailId = generateEmail(employee);
@@ -51,7 +53,7 @@ public class EmployeeService {
 		employee.setEmail(generatedEmailId);
 		employee.setPassword("@Password123");
 		
-		boolean isEmployeeAvailable = EmployeeValidator.isEmployeeNotAvailable(employee);
+		
 		
 		if (isEmployeeAvailable) {
 			employeeServiceDAO.addEmployee(employee);
@@ -160,6 +162,10 @@ public class EmployeeService {
 	public Map<String, Employee> displayIndividualEmployeeData(String employeeId) throws ClassNotFoundException, SQLException{
 		
 		return employeeServiceDAO.displayDetailOfAnIndividualEmployee(employeeId);
+	}
+
+	public boolean activateDeletedEmployee(String employeeIdToActivate) throws ClassNotFoundException, SQLException {
+		return employeeServiceDAO.activateDeletedEmployee(employeeIdToActivate);
 	}
 
 

@@ -11,9 +11,23 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-	<h3>Register</h3>
+	<div class="d-flex justify-content-center">
+		<h3>Employee Registration</h3>
+	</div>
+	<div class="btn-group-vertical pull-right">
+		<div class="row">
+			<div class="form-group col-md-2">
+			<a href="displayAllEmployees.jsp" class="btn btn-primary">Display Employees</a>
+		</div>
+		</div>
+	</div>
+	
+	
 <form action="RegisterEmployeeServlet" method="post">
-
+	
+	
+	
+	
 
 	<%
 	HttpSession session1 = request.getSession();
@@ -25,12 +39,30 @@
 		out.println("<font color='red'>"+errorMessage+"</font>");
 	}
 	if(infoMessage != null){
+		
 		out.println("<font color='green'>"+infoMessage+"-"+registeredEmployee+"</font>");
 		
 	}
 	%>
 	
-
+	<%String inActiveEmployeeId = request.getParameter("employeeId");
+	String activationStatus = request.getParameter("activationStatus");
+	if(inActiveEmployeeId!=null && activationStatus==null){
+	%>
+	<a href=ActivateEmployeeServlet?employeeIdToValidate=<%=inActiveEmployeeId %> id = "activateButton" class="btn btn-primary btn-sm" >Activate</a>
+		
+	<%}
+	String activationSuccessfull = request.getParameter("activationSuccessMessage");
+	String activationFailed = request.getParameter("activationFailureMessage");
+	if(activationSuccessfull!=null){
+		out.println("<font color='green'>"+activationSuccessfull+"-"+inActiveEmployeeId+"</font>");
+	}
+	else if(activationSuccessfull!=null){
+		out.println("<font color='red'>"+activationFailed+"-"+inActiveEmployeeId+"</font>");
+	}
+	
+	%>
+	
 	<div class="row">
 	  <div class="col">
 			<label>First Name  </label><input type="text" name="firstName" class="form-control form-control-sm" id="firstName" placeholder="First Name" required autofocus>
@@ -85,14 +117,17 @@
 		</div>
 
 		<div class="form-group col-md-2">
-			<a href="adminPortal.jsp" class="btn btn-primary">Back to Portal</a>
+			<a href="adminPortal.jsp" class="btn btn-primary">Admin Portal</a>
 		</div>
+	
 	</div>
+	
 	
 	<br/>
 
 
 </form>
+
 
 </main>
 

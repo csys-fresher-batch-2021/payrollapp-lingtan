@@ -15,13 +15,20 @@ String employeeId = (String)session.getAttribute("ADMIN_ID");
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <%if(employeeId == null){ %>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
         <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
-      
-     
     </ul>
+   <%}else if(employeeId.equals("Ling12007")){ %>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="adminPortal.jsp">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+   <%} %>
+
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
     <%if(employeeId == null){ %>
       <li class="nav-item active">
