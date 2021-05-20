@@ -3,6 +3,7 @@ package in.lingtan.servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,7 +82,9 @@ public class RegisterEmployeeServlet extends HttpServlet {
 				throw new CannotRegisterEmployeeException("Cannot Register user");
 			}
 		} catch (Exception e) {
-			response.sendRedirect("registerEmployee.jsp?errorMessage=" + e.getMessage());
+			RequestDispatcher rd=request.getRequestDispatcher("registerEmployee.jsp?errorMessage=" + e.getMessage());  
+			rd.forward(request, response);
+			
 		}
 
 	}

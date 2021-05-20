@@ -1,6 +1,8 @@
 package in.lingtan.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,13 +43,17 @@ public class AdminLoginServlet extends HttpServlet {
 			if (isValidAdmin) {
 				HttpSession session = request.getSession();
 				session.setAttribute("ADMIN_ID", adminUsername);
-				response.sendRedirect("adminPortal.jsp");
+				RequestDispatcher rd=request.getRequestDispatcher("adminPortal.jsp");  
+				rd.forward(request, response);
+				
 			}else {
 				throw new InvalidCredentialsException("Invalid Admin Credentials");
 			
 			}
 		} catch (Exception e) {
-			response.sendRedirect("adminLogin.jsp?errorMessage=" + e.getMessage());
+			RequestDispatcher rd=request.getRequestDispatcher("adminLogin.jsp?errorMessage=" + e.getMessage());  
+			rd.forward(request, response);
+			
 		}
 	}
 }
