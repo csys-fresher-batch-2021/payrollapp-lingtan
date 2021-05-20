@@ -46,7 +46,7 @@ public class DeleteEmployeeServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			
+			e.printStackTrace();
 		}
 		
 		
