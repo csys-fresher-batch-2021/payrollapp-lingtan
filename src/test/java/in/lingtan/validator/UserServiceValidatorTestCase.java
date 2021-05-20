@@ -7,7 +7,7 @@ import org.junit.Test;
 import in.lingtan.exceptions.InvalidEmployeeIdException;
 import in.lingtan.exceptions.InvalidEmployeeIdLengthException;
 
-public class UserValidatorTestCase {
+public class UserServiceValidatorTestCase {
 
 	/**
 	 * Valid employeeId length is validated
@@ -18,7 +18,7 @@ public class UserValidatorTestCase {
 		String employeeId = "Ling12007";
 		boolean isValidEmployeeId;
 		try {
-			isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
+			isValidEmployeeId = UserServiceValidator.isValidEmployeeIdLength(employeeId);
 			assertTrue(isValidEmployeeId);
 		} catch (InvalidEmployeeIdLengthException e) {
 			
@@ -34,7 +34,7 @@ public class UserValidatorTestCase {
 	public void invalidEmployeeIdLengthTest() {
 		try {
 			String employeeId = "Ling120";
-			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdLength(employeeId);
+			boolean isValidEmployeeId = UserServiceValidator.isValidEmployeeIdLength(employeeId);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
 			assertEquals("Invalid Length", e.getMessage());
@@ -50,7 +50,7 @@ public class UserValidatorTestCase {
 			String employeeId = "Ling12007";
 			boolean isValidEmployeeId;
 			try {
-				isValidEmployeeId = UserValidator.isValidEmployeeId(employeeId, "Invalid EmployeeID format or length");
+				isValidEmployeeId = UserServiceValidator.isValidEmployeeId(employeeId, "Invalid EmployeeID format or length");
 				assertTrue(isValidEmployeeId);
 			} catch (InvalidEmployeeIdException e) {
 				
@@ -66,7 +66,7 @@ public class UserValidatorTestCase {
 	public void invalidEmployyeeIdFormatTest() {
 		try {
 			String employeeName = "Ling145";
-			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
+			boolean isValidEmployeeId = UserServiceValidator.isValidEmployeeIdFormat(employeeName);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
 			assertEquals("Invalid EmployeeID Format" ,e.getMessage());
@@ -80,7 +80,7 @@ public class UserValidatorTestCase {
 	public void validEmployyeeIdFormatTest() {
 		try {
 			String employeeName = "Ling12007";
-			boolean isValidEmployeeId = UserValidator.isValidEmployeeIdFormat(employeeName);
+			boolean isValidEmployeeId = UserServiceValidator.isValidEmployeeIdFormat(employeeName);
 			assertTrue(isValidEmployeeId);
 		} catch (Exception e) {
 			assertEquals("Invalid EmployeeID Format", e.getMessage());

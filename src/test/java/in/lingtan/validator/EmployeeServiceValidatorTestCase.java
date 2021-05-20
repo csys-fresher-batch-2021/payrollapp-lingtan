@@ -9,7 +9,7 @@ import org.junit.Test;
 import in.lingtan.exceptions.ExistingEmployeeException;
 import in.lingtan.model.Employee;
 
-public class EmployeeValidatorTestCase {
+public class EmployeeServiceValidatorTestCase {
 
 	@Test
 	public void theEmployeeInDataBaseIsAddedAgainAndTested() {
@@ -21,7 +21,7 @@ public class EmployeeValidatorTestCase {
 		
 		boolean isAvailable;
 		try {
-			isAvailable = EmployeeValidator.isEmployeeNotAvailable(employee);
+			isAvailable = EmployeeServiceValidator.isEmployeeNotAvailable(employee);
 			assertTrue(isAvailable);
 		} catch (ClassNotFoundException | ExistingEmployeeException | SQLException e) {
 		
@@ -47,7 +47,7 @@ public class EmployeeValidatorTestCase {
 	
 		boolean isAvailable;
 		try {
-			isAvailable = EmployeeValidator.isEmployeeNotAvailable(employee);
+			isAvailable = EmployeeServiceValidator.isEmployeeNotAvailable(employee);
 			assertTrue(isAvailable);
 		} catch (ClassNotFoundException | ExistingEmployeeException | SQLException e) {
 			

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import in.lingtan.exceptions.InvalidCredentialsException;
 import in.lingtan.service.UserService;
 import in.lingtan.util.StringValidator;
-import in.lingtan.validator.UserValidator;
+import in.lingtan.validator.UserServiceValidator;
 
 /**
  * Servlet implementation class AdminValidationService
@@ -34,7 +34,7 @@ public class AdminLoginServlet extends HttpServlet {
 	
 			String adminUsername = request.getParameter("adminUsername");
 			String adminPassword = request.getParameter("adminPassword");			
-			UserValidator.isValidEmployeeId(adminUsername, "Invalid Employee ID");
+			UserServiceValidator.isValidEmployeeId(adminUsername, "Invalid Employee ID");
 			StringValidator.isStringNotNullOrEmpty(adminPassword, "Password field Cannot be empty");
 
 			boolean isValidAdmin = UserService.adminValidation(adminUsername, adminPassword);
@@ -42,8 +42,7 @@ public class AdminLoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("ADMIN_ID", adminUsername);
 				response.sendRedirect("adminPortal.jsp");
-			}
-			else {
+			}else {
 				throw new InvalidCredentialsException("Invalid Admin Credentials");
 			
 			}

@@ -11,7 +11,26 @@ import in.lingtan.model.Employee;
 import in.lingtan.util.ConnectionUtil;
 
 public class EmployeeServiceDAO {
-
+	
+	private static final String FIRST_NAME = "employee_id";
+	private static final String LAST_NAME = "last_name";
+	private static final String NAME = "name";
+	private static final String EMPLOYEE_ID = "employee_id";
+	private static final String ROLE = "role";
+	private static final String MOBILE_NUMBER = "mobile_number";
+	private static final String GENDER = "gender";
+	private static final String EMPLOYEE_EMAIL_ID = "email_id";
+	private static final String JOINED_DATE = "joined_date";
+	private static final String DOB = "dob";
+	private static final String ACTIVE_STATUS = "active_status";
+	private static final String INSERT_EMPLOYEE_DATA_QUERY = "insert into employee_data (first_name,last_name,name,role ,mobile_number,email_id,employee_id,dob,joined_date,password,gender,active_status) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String IS_EMPLOYEE_AVAILABLE_QUERY = "select last_name,mobile_number,active_status,employee_id from employee_data";
+	private static final String DISPLAY_ALL_EMPLOYEES_QUERY = "select first_name,employee_id from employee_data where active_status=1";
+	private static final String DISPLAY_INDIVIDUAL_EMPLOYEES_DATA_QUERY = "select first_name,name,employee_id,mobile_number,email_id,gender,role,dob,joined_date from employee_data where employee_id=?";
+	private static final String DELETE_EMPLOYEE_QUERY = "update employee_data set active_status=0 where employee_id=?";
+	private static final String SET_EMPLOYEE_ACTIVE_QUERY = "update employee_data set active_status=1 where employee_id=?";
+	
+	
 	/**
 	 * This Method Registers a new employee into a Database with their data.
 	 * 
@@ -19,15 +38,14 @@ public class EmployeeServiceDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-
 	public void addEmployee(Employee employee) throws ClassNotFoundException, SQLException {
-
+		
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
 			connection = ConnectionUtil.getConnection();
 
-			String sql = "insert into employee_data (firstname,lastname,name,role ,mobilenumber,emailid,employeeid,dob,joineddate,password,gender,activestatus) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = INSERT_EMPLOYEE_DATA_QUERY;
 
 			pst = connection.prepareStatement(sql);
 
@@ -108,16 +126,17 @@ public class EmployeeServiceDAO {
 			connection = ConnectionUtil.getConnection();
 			existingEmployeeCheck = new HashMap<>();
 
-			String str = "select * from employee_data";
+			String str = IS_EMPLOYEE_AVAILABLE_QUERY;
 			pst = connection.prepareStatement(str);
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
 				Employee employee = new Employee();
-				employee.setLastName(rs.getString("lastname"));
-				employee.setMobileNumber(rs.getLong("mobilenumber"));
-				employee.setActiveStatus(rs.getInt("activestatus"));
-
+				employee.setLastName(rs.getString(LAST_NAME));
+				employee.setMobileNumber(rs.getLong(MOBILE_NUMBER));
+				employee.setActiveStatus(rs.getInt(ACTIVE_STATUS));
+				employee.setEmployeeID(rs.getString(EMPLOYEE_ID));
+				
 				existingEmployeeCheck.put(employee.getMobileNumber(), employee);
 				
 			}
@@ -129,7 +148,7 @@ public class EmployeeServiceDAO {
 		finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
-	
+		
 		return existingEmployeeCheck;
 
 	}
@@ -151,13 +170,13 @@ public class EmployeeServiceDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 
-			String str = "select * from employee_data where activestatus=1";
+			String str = DISPLAY_ALL_EMPLOYEES_QUERY;
 			pst1 = connection.prepareStatement(str);
 			rs = pst1.executeQuery();
 
 			while (rs.next()) {
-				String employeeName = rs.getString("firstname");
-				String employeeId = rs.getString("employeeid");
+				String employeeName = rs.getString(FIRST_NAME);
+				String employeeId = rs.getString(EMPLOYEE_ID);
 				allEmployeeDataToDisplay.put(employeeId, employeeName);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
@@ -185,20 +204,20 @@ public class EmployeeServiceDAO {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			String str = "select * from employee_data where employeeid=?";
+			String str = DISPLAY_INDIVIDUAL_EMPLOYEES_DATA_QUERY;
 			pst = connection.prepareStatement(str);	
 			pst.setString(1, employeeId);
 			rs = pst.executeQuery();
 			while(rs.next()) {
-				employee.setFirstName(rs.getString("firstname"));
-				employee.setName(rs.getString("name"));
-				employee.setEmployeeID(rs.getString("employeeid"));
-				employee.setMobileNumber(rs.getLong("mobilenumber"));
-				employee.setEmail(rs.getString("emailid"));
-				employee.setGender(rs.getString("gender"));
-				employee.setRole(rs.getString("role"));
-				employee.setDob(LocalDate.parse(rs.getString("dob")));
-				employee.setJoiningDate(LocalDate.parse(rs.getString("joineddate")));
+				employee.setFirstName(rs.getString(FIRST_NAME));
+				employee.setName(rs.getString(NAME));
+				employee.setEmployeeID(rs.getString(EMPLOYEE_ID));
+				employee.setMobileNumber(rs.getLong(MOBILE_NUMBER));
+				employee.setEmail(rs.getString(EMPLOYEE_EMAIL_ID));
+				employee.setGender(rs.getString(GENDER));
+				employee.setRole(rs.getString(ROLE));
+				employee.setDob(LocalDate.parse(rs.getString(DOB)));
+				employee.setJoiningDate(LocalDate.parse(rs.getString(JOINED_DATE)));
 				
 				allEmployeeDataToDisplay.put(employee.getEmployeeID(),employee);
 			}
@@ -227,7 +246,7 @@ public class EmployeeServiceDAO {
 		try {
 			connection = ConnectionUtil.getConnection();
 
-			String str = "update employee_data set activestatus=0 where employeeid=?";
+			String str = DELETE_EMPLOYEE_QUERY;
 			pst = connection.prepareStatement(str);
 			pst.setString(1, employeeId);
 			pst.executeUpdate();
@@ -244,6 +263,32 @@ public class EmployeeServiceDAO {
 		return isDeleted;
 		
 	}	
+	
+	public boolean activateDeletedEmployee(String employeeIdToActivate) throws ClassNotFoundException, SQLException {
+		
+		
+			Connection connection = null;
+			PreparedStatement pst = null;
+			boolean isActivated = false;
+			
+			try {
+				connection = ConnectionUtil.getConnection();
+				
+				String str = SET_EMPLOYEE_ACTIVE_QUERY;
+				pst = connection.prepareStatement(str);
+				pst.setString(1, employeeIdToActivate);
+				pst.executeUpdate();
+				isActivated = true;
+			} catch (ClassNotFoundException | SQLException e) {
+
+				e.printStackTrace();
+			}
+		
+			finally {
+				ConnectionUtil.close(pst, connection);
+			}
+			return isActivated;
+	}
 	
 
 

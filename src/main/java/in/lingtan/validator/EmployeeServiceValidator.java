@@ -7,9 +7,9 @@ import in.lingtan.dao.EmployeeServiceDAO;
 import in.lingtan.exceptions.ExistingEmployeeException;
 import in.lingtan.model.Employee;
 
-public class EmployeeValidator {
+public class EmployeeServiceValidator {
 
-	private EmployeeValidator() {
+	private EmployeeServiceValidator() {
 		// Default Constructor.
 	}
 
@@ -39,7 +39,7 @@ public class EmployeeValidator {
 					throw new ExistingEmployeeException(employee.getName() + " - Already registered");
 				
 				} else {
-					throw new ExistingEmployeeException(employee.getName() + " - Already available in Database do you want to activate");
+					throw new ExistingEmployeeException(employee.getName() + " - Already available - "+"&employeeId="+employeeMapSet.getValue().getEmployeeID());
 				}
 			} else {
 				isAvailable = true;

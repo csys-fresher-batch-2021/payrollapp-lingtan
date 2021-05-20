@@ -7,7 +7,7 @@ public class StringValidator {
 	private StringValidator() {
 		// Default Constructor
 	}
-
+	
 	/**
 	 * This verifies whether the role field is filled or not
 	 * 
