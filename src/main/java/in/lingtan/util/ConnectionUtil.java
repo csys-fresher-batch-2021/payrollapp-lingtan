@@ -12,6 +12,10 @@ public class ConnectionUtil {
 	private ConnectionUtil() {
 		//Default constructor
 	}
+	private static String driverClass = System.getenv("spring.datasource.driver-class-name");
+	private static String url = System.getenv("spring.datasource.url");
+	private static String username = System.getenv("spring.datasource.username");
+	private static String password = System.getenv("spring.datasource.password");
 	
 	/**
 	 * This method creates a database connection.
@@ -21,16 +25,11 @@ public class ConnectionUtil {
 	 */
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		
-		String driverClass = "org.postgresql.Driver";
-		String url = "jdbc:postgresql://localhost/employeedb";
-		String userName = "postgres";
-		String password = "@Lingtan1112";
-	
 		Class.forName(driverClass);
 		
-		return DriverManager.getConnection(url, userName, password);
+		return DriverManager.getConnection(url, username, password);
 		
-	
+	//org.postgresql.Driver  jdbc:postgresql://localhost/employeedb postgres @Lingtan1112
 	}
 	
 	/**

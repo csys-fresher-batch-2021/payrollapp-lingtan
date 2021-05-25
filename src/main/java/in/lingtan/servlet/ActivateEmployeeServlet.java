@@ -38,12 +38,12 @@ public class ActivateEmployeeServlet extends HttpServlet {
 		
 			EmployeeService employeeService = new EmployeeService();
 			if(employeeService.activateDeletedEmployee(employeeIdToActivate)) {
-				RequestDispatcher rd=request.getRequestDispatcher("registerEmployee.jsp?activationSuccessMessage=Successfully activated &employeeId="+employeeIdToActivate +"&activationStatus=yes");  
+				RequestDispatcher rd = request.getRequestDispatcher("registerEmployee.jsp?activationSuccessMessage=Successfully activated &employeeId="+employeeIdToActivate +"&activationStatus=yes");  
 				rd.forward(request, response);
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			RequestDispatcher rd=request.getRequestDispatcher("registerEmployee.jsp?activationFailureMessage=Cannot activate");  
+			RequestDispatcher rd = request.getRequestDispatcher("registerEmployee.jsp?activationFailureMessage=Cannot activate");  
 			rd.forward(request, response);
 			e.printStackTrace();
 		}
