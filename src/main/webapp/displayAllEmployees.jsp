@@ -59,7 +59,7 @@
 						href="displayIndividualEmployeeData.jsp?employeeId=<%=employeeId.getKey()%>">View
 							Details</a></td>
 					<td><a
-						href="DeleteEmployeeServlet?employeeId=<%=employeeId.getKey()%>">Delete
+						href="DeleteEmployeeServlet?employeeId=<%=employeeId.getKey()%> " onclick="return deleteConfirmation('<%=employeeId.getKey()%>')">Delete
 							ID</a></td>
 				</tr>
 				<%
@@ -70,5 +70,13 @@
 			<a href="adminPortal.jsp">Main menu</a>
 			<br>
 	</main>
+	<script>
+	function deleteConfirmation(employeeId){
+		if(confirm("Are You sure want to delete "+employeeId)){
+		}else{
+			event.preventDefault();
+		}
+	}
+	</script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package in.lingtan.util;
 
 import org.apache.taglibs.standard.lang.jstl.parser.ParseException;
 
+import in.lingtan.exceptions.InvalidIntegerException;
 import in.lingtan.exceptions.InvalidLongNumberTypeException;
 import in.lingtan.exceptions.InvalidMobileNumberException;
 import in.lingtan.exceptions.InvalidNumberLengthException;
@@ -84,5 +85,20 @@ public class NumberValidator {
 			throw new InvalidMobileNumberException(e.getMessage());
 		}
 
+	}
+
+	public static int isValidInteger(String number, String message) throws InvalidIntegerException {
+		if(number==null) {
+			return 0;
+		}
+		else {
+			try {
+				return Integer.parseInt(number);
+			}
+			catch(Exception e) {
+				throw new InvalidIntegerException(message);
+			}
+			
+		}		
 	}
 }

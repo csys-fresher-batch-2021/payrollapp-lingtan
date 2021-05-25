@@ -14,8 +14,12 @@
 <jsp:include page="header.jsp"></jsp:include>
 	<br />
 	<main class="container-fluid">
-
+	<a href="addSalary.jsp" type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left">Pay slip</a>
+	
+	<br/>
 	<table class="table" border="1">
+	
+	
 	
 		<caption>Employee Data</caption>
 		<tbody>

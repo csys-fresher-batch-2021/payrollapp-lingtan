@@ -26,7 +26,7 @@
 			<a href="displayAllEmployees.jsp">Display Employees</a><br>
 		</div>
 		<div class="d-flex justify-content-center">
-			<a href="adminOperations.jsp">Admin Modifications</a><br>
+			<a href="addSalary.jsp">Pay Roll Portal</a><br>
 		</div>
 		<div class="d-flex justify-content-center">
 			<a href="index.jsp">Main page</a><br>
