@@ -26,8 +26,7 @@ public class PayRollService {
 		int calculatedPf = payRollService.caluculatePf(payRollDTO);
 		int calculatedSalary = payRollService.calculateSalary(payRollDTO);
 		int calculatedCtc = payRollService.calculateCtc(payRollDTO);
-		System.out.println(calculatedCtc);
-		
+			
 		
 		payRoll.setRole(payRollDTO.getRole());
 		payRoll.setBasicPay(payRollDTO.getBasicPay());
