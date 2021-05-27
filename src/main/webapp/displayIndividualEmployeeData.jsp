@@ -10,11 +10,16 @@
 <title>Employee Data</title>
 </head>
 <body>
-
+			<%
+			String employeeId = request.getParameter("employeeId");
+			EmployeeService employeeService = new EmployeeService();
+			Map<String, Employee> individualEmployeeData = employeeService.displayIndividualEmployeeData(employeeId);
+			Employee employee = individualEmployeeData.get(employeeId);
+			%>
 <jsp:include page="header.jsp"></jsp:include>
 	<br />
 	<main class="container-fluid">
-	<a href="addSalary.jsp" type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left">Pay slip</a>
+	<a href="#" onclick="generatePaySlipForEmployee()" type="button" class="btn btn-primary btn-color btn-bg-color btn-sm col-xs-2 margin-left">Pay slip</a>
 	
 	<br/>
 	<table class="table" border="1">
@@ -25,12 +30,7 @@
 		<tbody>
 
 
-			<%
-			String employeeId = request.getParameter("employeeId");
-			EmployeeService employeeService = new EmployeeService();
-			Map<String, Employee> individualEmployeeData = employeeService.displayIndividualEmployeeData(employeeId);
-			Employee employee = individualEmployeeData.get(employeeId);
-			%>
+		
 			<tr>
 			<th scope="col"><h3 style = "color:green"><%= employee.getFirstName()%></h3></th>
 			</tr>
@@ -38,9 +38,9 @@
 				<th scope="row">Employee Name</th>
 				<td><%= employee.getName()%></td>
 			</tr>
-			<tr>
+			<tr id="employeeId">
 				<th scope="row">Employee-ID</th>
-				<td><%= employee.getEmployeeID()%></td>
+				<td ><%= employee.getEmployeeID()%></td>
 			</tr>
 			<tr>
 			<tr>
@@ -69,6 +69,22 @@
 		</tbody>
 	</table>
 	</main>
+<script type="text/javascript">
+
+
+function generatePaySlipForEmployee(){
+
+	var row = document.getElementById("employeeId");
+	var cells = row.getElementsByTagName("td");
+	let employeeId = cells[0].innerHTML;
+	window.location.href="paySlipOfEmployee.jsp?employeeId="+employeeId;
+}
+
+
+
+</script>
+
+
 </body>
 <a href="displayAllEmployees.jsp">Previous page</a>
 

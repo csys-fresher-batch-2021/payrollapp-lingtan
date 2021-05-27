@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import in.lingtan.model.Employee;
 import in.lingtan.model.PayRoll;
 import in.lingtan.util.ConnectionUtil;
 
@@ -26,14 +29,15 @@ public class PayRollServiceDAO {
 	/**
 	 * This method updates the database with the payroll data recieved  from the payroll service class
 	 * @param payRoll
+	 * @return 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public void update(PayRoll payRoll) throws ClassNotFoundException, SQLException {
+	public boolean update(PayRoll payRoll) throws ClassNotFoundException, SQLException {
 		
 	
 		
-		
+		boolean isAdded = false;
 		Connection connection = null;
 		PreparedStatement pst = null;
 		try {
@@ -54,12 +58,15 @@ public class PayRollServiceDAO {
 			pst.setString(10, payRoll.getRole());
 			
 			pst.executeUpdate();
+			isAdded = true;
 		} catch (ClassNotFoundException | SQLException e) {
-
 			e.printStackTrace();
-		}
+		}finally {
 		
-		ConnectionUtil.close(pst, connection);
+			ConnectionUtil.close(pst, connection);
+			
+		}
+		return isAdded;
 	}
 	
 	/**
@@ -109,6 +116,61 @@ public class PayRollServiceDAO {
 		
 		return payRollDataForARole;
 	}
+	
+	
+	/**
+	 * This methof gets the payroll data for a selected individual employee from the database.
+	 * @param role
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public 	List<PayRoll> getPayForEmployee(String role) throws ClassNotFoundException, SQLException {
+		
+		List<PayRoll> payRollDataForAnEmployee = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			connection = ConnectionUtil.getConnection();
+			String sql = "select e.name,mobile_number,employee_id,e.role, p.basic_pay,hra,pf,medical_allowance, food_allowance, travel_allowance,salary,ctc from employee_data e, payroll_data p where (e.role = p.role) and employee_id=?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, role);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				PayRoll payRoll = new PayRoll();
+				Employee employee = new Employee();
+				employee.setName(rs.getString("name"));
+				employee.setMobileNumber(rs.getLong("mobile_number"));
+				employee.setEmployeeID(rs.getString("employee_id"));
+				employee.setRole(rs.getString("role"));
+				
+				payRoll.setEmployee(employee);
+				payRoll.setBasicPay(rs.getInt(BASIC_PAY));
+				payRoll.setHraAllowance(rs.getInt(HRA));
+				payRoll.setFoodAllowance(rs.getInt(FOOD_ALLOWANCE));
+				payRoll.setMedicalAllowance(rs.getInt(MEDICAL_ALLOWANCE));
+				payRoll.setPfAllowance(rs.getInt(PF));
+				payRoll.setTravelAllowance(rs.getInt(TRAVEL_ALLOWANCE));
+				
+				payRoll.setSalary(rs.getInt(SALARY));
+				payRoll.setCtc(rs.getInt(CTC));
+				
+				payRollDataForAnEmployee.add(payRoll);
+			}
+		
+		} catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+		finally {
+			ConnectionUtil.close(rs, pst, connection);
+		}
+
+		return payRollDataForAnEmployee;
+	}
+
 	
 
 }
