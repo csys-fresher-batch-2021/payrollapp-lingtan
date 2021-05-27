@@ -20,13 +20,13 @@ import in.lingtan.service.PayRollService;
  * Servlet implementation class PaySlipGenerationForEmployeeId
  */
 @WebServlet("/PaySlipGenerationForEmployeeId")
-public class PaySlipGenerationForEmployeeId extends HttpServlet {
+public class PaySlipGenerationForEmployeeIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaySlipGenerationForEmployeeId() {
+    public PaySlipGenerationForEmployeeIdServlet() {
         super();
 
     }
