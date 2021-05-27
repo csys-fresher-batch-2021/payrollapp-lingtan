@@ -66,11 +66,11 @@
 				loginForm.classList.add("was-validated"); 
 			}
 					
-			if (username.value.length == 0) {
-				username.classList.add("is-invalid");
+			if (adminUsername.value.length == 0) {
+				adminUsername.classList.add("is-invalid");
 			}
 			else{
-				username.classList.add("is-valid");
+				adminUsername.classList.add("is-valid");
 			}
 					
 		}

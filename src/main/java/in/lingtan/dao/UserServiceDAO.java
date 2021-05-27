@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.lingtan.exceptions.CannotGetCredentialException;
 import in.lingtan.util.ConnectionUtil;
 
 
@@ -21,9 +22,10 @@ public class UserServiceDAO {
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
+	 * @throws CannotGetCredentialException 
 	 */
 	
-	public Map<String, String>  adminCredentialData() throws ClassNotFoundException, SQLException {
+	public Map<String, String>  adminCredentialData() throws ClassNotFoundException, SQLException, CannotGetCredentialException {
 		
 		Map<String, String> userCredetials = new HashMap<>();
 		Connection connection = null;
@@ -33,8 +35,7 @@ public class UserServiceDAO {
 			userCredetials = new HashMap<>();
 			
 			connection = ConnectionUtil.getConnection();
-			
-			
+						
 			String sql = "select * from user_service";
 			pst = connection.prepareStatement(sql);
 			rs = pst.executeQuery();
@@ -45,13 +46,47 @@ public class UserServiceDAO {
 				userCredetials.put(username,password);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-
-			e.getMessage();
+			throw new CannotGetCredentialException(e.getMessage());
 		}
 		finally {
 			ConnectionUtil.close(rs, pst,  connection);
 		}		
 		return userCredetials;
+	}
+
+	/**
+	 * This method returns a HashMap containing username and password to the service class calling it.
+	 * @return
+	 * @throws CannotGetCredentialException 
+	 */
+	public Map<String, String> employeeCredentialData() throws ClassNotFoundException, SQLException, CannotGetCredentialException{
+		
+		Map<String, String> employeeCredetials = new HashMap<>();
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		try {
+			employeeCredetials = new HashMap<>();
+			
+			connection = ConnectionUtil.getConnection();
+			
+			String sql = "select employee_id,password from employee_data";
+			pst = connection.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				String username = rs.getString("employee_id");
+				String password = rs.getString("password");
+				employeeCredetials.put(username,password);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new CannotGetCredentialException(e.getMessage());
+		}
+		finally {
+			ConnectionUtil.close(rs, pst,  connection);
+		}	
+		
+		return employeeCredetials;
 	}
 	
 }

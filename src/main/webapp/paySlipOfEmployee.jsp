@@ -11,7 +11,6 @@ font-weight:bold;
 border:none;
 }
 
-
 #grossCompensation,#grossCompensationLabel, #ctcLabel, #ctc{
 background-color:#34495E;
 color:white;
@@ -113,10 +112,10 @@ padding:20px;
  *and gets a json data from the servlet, and writes those json data to the html. 
  */
 function getPaySlipFromServlet(employeeId){
-
-	let url = "PaySlipGenerationForEmployeeId?employeeId="+employeeId;
+	let params = 'employeeId='+employeeId;
+	let url = "PaySlipGenerationForEmployeeId?"+params;
 	
-	fetch(url).then(res=> res.json()).then(res=>{
+	fetch(url,{method:'post'}).then(res=> res.json()).then(res=>{
 		let data = res;
 		
 		
@@ -135,7 +134,7 @@ function getPaySlipFromServlet(employeeId){
 			document.getElementById('ctc').innerHTML = (payData.ctc);
 			document.getElementById('paySlipTitle').innerHTML = "Pay Slip of "+(payData.employee.employeeID);
 		}
-		console.log("pay slip data")
+		console.log("pay slip data");
 		console.log(data);
 	})
 }

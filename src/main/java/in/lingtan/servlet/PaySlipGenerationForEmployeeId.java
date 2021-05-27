@@ -36,7 +36,7 @@ public class PaySlipGenerationForEmployeeId extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	PayRollService payRollService = new PayRollService();
 		String employeeId = request.getParameter("employeeId");
 		

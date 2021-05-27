@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import in.lingtan.exceptions.CannotGetCredentialException;
 import in.lingtan.exceptions.InvalidCredentialsException;
 
 public class UserServiceTestCase {
@@ -20,7 +21,13 @@ public class UserServiceTestCase {
 	public void adminValidationTestBothValid() throws InvalidCredentialsException, ClassNotFoundException, SQLException {
 		String employeeId = "Ling12007";
 		String password = "@Lingtan1112";
-		boolean inValidCredentials = UserService.adminValidation(employeeId, password);
+		boolean inValidCredentials=false;
+		try {
+			inValidCredentials = UserService.adminValidation(employeeId, password);
+		} catch (ClassNotFoundException | SQLException | CannotGetCredentialException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertTrue(inValidCredentials);
 	}
 
