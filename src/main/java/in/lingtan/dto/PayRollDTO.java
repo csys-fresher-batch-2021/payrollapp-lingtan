@@ -1,15 +1,15 @@
 package in.lingtan.dto;
 
-
+import in.lingtan.model.Employee;
 
 public class PayRollDTO {
 
 	@Override
 	public String toString() {
 		return "PayRollDTO [basicPay=" + basicPay + ", ctc=" + ctc + ", pfPercentage=" + pfPercentage + ", salary="
-				+ salary + ", role=" + role + ", pfAllowance=" + pfAllowance + ", medicalAllowance=" + medicalAllowance
-				+ ", travelAllowance=" + travelAllowance + ", hraAllowance=" + hraAllowance + ", foodAllowance="
-				+ foodAllowance + "]";
+				+ salary + ", employee=" + employee + ", role=" + role + ", pfAllowance=" + pfAllowance
+				+ ", medicalAllowance=" + medicalAllowance + ", travelAllowance=" + travelAllowance + ", hraAllowance="
+				+ hraAllowance + ", foodAllowance=" + foodAllowance + "]";
 	}
 	public PayRollDTO() {
 		super();
@@ -85,7 +85,16 @@ public class PayRollDTO {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	private Employee employee;
 	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
+
 	private String role;
 	private int pfAllowance ;
 	private int medicalAllowance ;

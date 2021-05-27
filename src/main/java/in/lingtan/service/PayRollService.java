@@ -3,9 +3,9 @@ package in.lingtan.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import in.lingtan.dao.PayRollServiceDAO;
 import in.lingtan.dto.PayRollDTO;
+import in.lingtan.model.Employee;
 import in.lingtan.model.PayRoll;
 
 
@@ -17,10 +17,11 @@ public class PayRollService {
 	/**
 	 * This method gets the form values from the servlet and send those values to the DAO class to update in the database.
 	 * @param payRollDTO
+	 * @return 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public void updatePayRollData(PayRollDTO payRollDTO) throws ClassNotFoundException, SQLException {
+	public boolean updatePayRollData(PayRollDTO payRollDTO) throws ClassNotFoundException, SQLException {
 		
 		PayRollService payRollService = new PayRollService();
 		int calculatedPf = payRollService.caluculatePf(payRollDTO);
@@ -40,7 +41,8 @@ public class PayRollService {
 		payRoll.setCtc(calculatedCtc);
 		
 		
-		payRollServiceDAO.update(payRoll);
+		return payRollServiceDAO.update(payRoll);
+		
 		
 		
 	}
@@ -76,6 +78,45 @@ public class PayRollService {
 			
 		}
 		return payRollDataArrayForServlet;	
+	}
+	
+	/**
+	 * This method gets all the required payroll data from the database class for generating a payslip.
+	 * @param role
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public List<PayRollDTO> getPayRollDataForEmployee(String role) throws ClassNotFoundException, SQLException {
+
+		List<PayRollDTO> payRollDataForEmployeeToServlet = new ArrayList<>();
+		
+		Employee employee = new Employee();
+		PayRollDTO payRollDTO = new PayRollDTO();
+		List<PayRoll> payRollDataForEmployee = payRollServiceDAO.getPayForEmployee(role);
+	
+		for(PayRoll  payRollData : payRollDataForEmployee) {
+			
+			employee.setName(payRollData.getEmployee().getName());
+			
+			employee.setMobileNumber(payRollData.getEmployee().getMobileNumber());
+			employee.setEmployeeID(payRollData.getEmployee().getEmployeeID());
+			employee.setRole(payRollData.getEmployee().getRole());
+			
+			payRollDTO.setEmployee(employee);
+			payRollDTO.setBasicPay(payRollData.getBasicPay());
+			payRollDTO.setHraAllowance(payRollData.getHraAllowance());
+			payRollDTO.setPfAllowance(payRollData.getPfAllowance());
+			payRollDTO.setMedicalAllowance(payRollData.getMedicalAllowance());
+			payRollDTO.setTravelAllowance(payRollData.getTravelAllowance());
+			payRollDTO.setFoodAllowance(payRollData.getFoodAllowance());
+			payRollDTO.setSalary(payRollData.getSalary());
+			payRollDTO.setCtc(payRollData.getCtc());
+			payRollDataForEmployeeToServlet.add(payRollDTO);
+				
+		}
+		
+		return payRollDataForEmployeeToServlet;
 	}
 	
 	/**

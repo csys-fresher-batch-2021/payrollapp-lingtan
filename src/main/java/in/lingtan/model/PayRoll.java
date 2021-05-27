@@ -72,9 +72,18 @@ public class PayRoll {
 	@Override
 	public String toString() {
 		return "PayRoll [ctc=" + ctc + ", basicPay=" + basicPay + ", pfPercentage=" + pfPercentage + ", salary="
-				+ salary + ", pfAllowance=" + pfAllowance + ", medicalAllowance=" + medicalAllowance
-				+ ", travelAllowance=" + travelAllowance + ", hraAllowance=" + hraAllowance + ", foodAllowance="
-				+ foodAllowance + ", role=" + role + "]";
+				+ salary + ", employee=" + employee + ", pfAllowance=" + pfAllowance + ", medicalAllowance="
+				+ medicalAllowance + ", travelAllowance=" + travelAllowance + ", hraAllowance=" + hraAllowance
+				+ ", foodAllowance=" + foodAllowance + ", role=" + role + "]";
+	}
+	
+	private Employee employee;
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	private int pfAllowance ;
 	private int medicalAllowance ;

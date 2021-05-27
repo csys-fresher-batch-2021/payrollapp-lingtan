@@ -10,10 +10,12 @@
 	<br/>
 		<div class="d-flex justify-content-center">
 		
-		<div class="md=5 row">
+			<div class="md=5 row">
 		
 				<h3 >ADMIN LOGIN PORTAL</h3>
+			
 			</div>
+		
 		</div><br>
 
 		<form id= "loginForm" action="AdminLogin" method="post" onclick=login() >
@@ -49,7 +51,7 @@
 			</div><br/>
 			<div class="d-flex justify-content-center">
 				<div class="md=2 row">
-					<br> <a href="index.jsp" >Employee Login</a>
+					<br> <a href="employeeLogin.jsp" >Employee Login</a>
 				</div>
 			</div>
 	<script type="text/javascript">
