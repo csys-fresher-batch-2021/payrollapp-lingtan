@@ -61,7 +61,7 @@
 			let adminPassword = document.querySelector("#adminPassword");
 			if(loginForm.checkValidity()){
 				loginForm.classList.remove("was-validated");
-				loginForm.submit(); 
+				
 			} else {
 				loginForm.classList.add("was-validated"); 
 			}
@@ -71,12 +71,9 @@
 			}
 			else{
 				adminUsername.classList.add("is-valid");
-			}
-					
+			}			
 		}
-			
-			
-			</script>
+	</script>
 
 		</form>
 		

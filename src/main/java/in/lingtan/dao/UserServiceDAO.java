@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.lingtan.exceptions.CannotChangePasswordException;
 import in.lingtan.exceptions.CannotGetCredentialException;
 import in.lingtan.util.ConnectionUtil;
 
@@ -87,6 +88,47 @@ public class UserServiceDAO {
 		}	
 		
 		return employeeCredetials;
+	}
+	
+	/**
+	 * This method gets the new password and employeeid as parameter and updates the new password with the old password.
+	 * @param employeeId
+	 * @param newPassword
+	 * @return
+	 * @throws CannotGetCredentialException
+	 * @throws CannotChangePasswordException
+	 */
+	public boolean changePassword(String employeeId, String newPassword) throws CannotGetCredentialException, CannotChangePasswordException {
+		
+		boolean isChanged = false;
+		Connection connection = null;
+		PreparedStatement pst = null;
+		
+		try {
+			connection = ConnectionUtil.getConnection();
+			
+			String sql = "update employee_data set password=? where employee_id=?";
+			pst = connection.prepareStatement(sql);
+			pst.setString(1, newPassword);
+			pst.setString(2, employeeId);
+			
+			int rs = pst.executeUpdate();
+			
+			if(rs==1) {
+				 isChanged = true;
+			}
+			else {
+				throw new CannotChangePasswordException("Cannot Change the password");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new CannotGetCredentialException(e.getMessage());
+		}
+		finally {
+			ConnectionUtil.close(pst,  connection);
+		}	
+			
+		return isChanged;
+		
 	}
 	
 }
