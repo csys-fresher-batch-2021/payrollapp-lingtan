@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.google.gson.JsonObject;
 
 
@@ -50,7 +52,10 @@ public class EmployeeLoginServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			
 			boolean isValid = UserService.employeeLoginValidation(employeeId, password);
-			
+			if(isValid) {
+				HttpSession session = request.getSession();
+				session.setAttribute("EMPLOYEE_LOGIN_USERNAME", employeeId);
+			}
 			JsonObject obj = new JsonObject(); 
 			obj.addProperty("IS_VALID", isValid);
 			out.println(obj);

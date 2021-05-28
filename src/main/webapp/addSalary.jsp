@@ -133,15 +133,17 @@ height:    80px;
 			<button class="btn btn-success" id="saveButton" onclick="saveRole()" style="visibility: hidden;width:180px;">Save Changes</button><br>
 		</div>
 	</div>
+	<div class="row">
+		<div class="form-group col-md-2">
+			<a href="adminPortal.jsp" >Admin portal</a><br>
+		</div>
+	</div>
+	
 	
 	
 	<br/>
 
-
 </form>
-
-
-
 </main>
 
 
