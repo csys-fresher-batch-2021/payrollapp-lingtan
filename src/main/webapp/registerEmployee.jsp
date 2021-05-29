@@ -65,7 +65,7 @@
 	
 	<div class="row">
 	  <div class="col">
-			<label>First Name  </label><input type="text" name="firstName" class="form-control form-control-sm" id="firstName" placeholder="First Name" required autofocus>
+			<label>First Name  </label><input type="text" name="firstName" class="form-control form-control-sm" id="firstName" pattern="[a-zA-Z]+" placeholder="First Name" required autofocus>
 	  </div>
 	  <div class="col">
 			<label>Last Name  </label><input type="text" name="lastName" id="lastName" class="form-control form-control-sm" placeholder="Employee's Father Name" required >

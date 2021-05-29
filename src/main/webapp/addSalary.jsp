@@ -62,7 +62,15 @@ height:    80px;
 	
 <form action="AddPayServlet" id="AddPayServlet" method="post">
 	
+	<%String infoMessage = request.getParameter("infoMessage");
+	  String errorMessage = request.getParameter("errorMessage");
+	  if(infoMessage!=null){
+		  out.println("<font color='green'>"+infoMessage+"</font>");
+	  }else if(errorMessage!=null){
+		  out.println("<font color='red'>"+errorMessage+"</font>");
+	  }
 	
+	%>
 	<div class="row">
 		<div class="col">
 			<label>Role </label>

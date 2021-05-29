@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+
 
 import in.lingtan.dto.PayRollDTO;
 import in.lingtan.service.PayRollService;
@@ -82,12 +82,20 @@ public class AddPayServlet extends HttpServlet {
 			
 
 			payRollDTO.setRole(role);
+			
 			payRollDTO.setBasicPay(NumberValidator.isValidInteger(basicPay, "Invalid Basic Pay"));
 			payRollDTO.setHraAllowance(NumberValidator.isValidInteger(hra, "Invalid HRA"));
 			payRollDTO.setFoodAllowance(NumberValidator.isValidInteger(foodAllowance, "Invalid Food Allowance"));
 			payRollDTO.setTravelAllowance(NumberValidator.isValidInteger(travelAllowance, "Invalid Travel Allowance"));
 			payRollDTO.setMedicalAllowance(NumberValidator.isValidInteger(medicalAllowance, "Invalid Medical Allowance"));
 			payRollDTO.setPfPercentage(NumberValidator.isValidInteger(pfPercentage, "Invalid PF percentage"));
+			
+			NumberValidator.isValidPayData(payRollDTO.getBasicPay(),"Basic pay cannot be Negative");
+			NumberValidator.isValidPayData(payRollDTO.getHraAllowance(),"HRA cannot be negative");
+			NumberValidator.isValidPayData(payRollDTO.getFoodAllowance(),"FoodAllowance cannot be negative");
+			NumberValidator.isValidPayData(payRollDTO.getPfPercentage(),"Pf percentage cannot be negative");
+			NumberValidator.isValidPayData(payRollDTO.getMedicalAllowance(),"Medical Allowance cannot be negative");
+			NumberValidator.isValidPayData(payRollDTO.getTravelAllowance(),"Travel Allowance cannot be negative");
 			
 			
 			PayRollService payRollService = new PayRollService();
@@ -98,8 +106,8 @@ public class AddPayServlet extends HttpServlet {
 			rd.forward(request, response);
 	
 		} catch (Exception e) {
-			JsonObject object = new JsonObject();
-			object.addProperty("ERROR_MESSAGE", "Unable to Display Data");
+			RequestDispatcher rd = request.getRequestDispatcher("addSalary.jsp?errorMessage="+e.getMessage());
+			rd.forward(request, response);
 		}
 		
 	}
