@@ -65,6 +65,15 @@ public class NumberValidator {
 		}
 		return isValidNumber;
 	}
+	
+	public static boolean isValidPayData(int number, String errorMessage) throws NumberCannotBeNegativeException {
+		if(number<0) {
+			throw new NumberCannotBeNegativeException(errorMessage);
+		}
+		
+		return true;
+		
+	}
 
 	/**
 	 * This method checks whether a given mobile number is a 10 digit number and the
