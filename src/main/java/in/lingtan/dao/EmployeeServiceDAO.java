@@ -5,14 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import in.lingtan.model.Employee;
 import in.lingtan.util.ConnectionUtil;
 
 public class EmployeeServiceDAO {
 	
-	private static final String FIRST_NAME = "employee_id";
+	private static final String FIRST_NAME = "first_name";
 	private static final String LAST_NAME = "last_name";
 	private static final String NAME = "name";
 	private static final String EMPLOYEE_ID = "employee_id";
@@ -161,9 +163,9 @@ public class EmployeeServiceDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public Map<String, String> displayAllEmployees() throws ClassNotFoundException, SQLException {
-
-		Map<String, String> allEmployeeDataToDisplay = new HashMap<>();
+public List<Employee> displayAllEmployees() throws ClassNotFoundException, SQLException {
+		
+		List<Employee> allEmployeeDataToDisplay = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement pst1 = null;
 		ResultSet rs = null;
@@ -175,18 +177,20 @@ public class EmployeeServiceDAO {
 			rs = pst1.executeQuery();
 
 			while (rs.next()) {
-				String employeeName = rs.getString(FIRST_NAME);
-				String employeeId = rs.getString(EMPLOYEE_ID);
-				allEmployeeDataToDisplay.put(employeeId, employeeName);
-			}
+				Employee employee = new Employee();
+				employee.setName(rs.getString(FIRST_NAME));
+				employee.setEmployeeID(rs.getString(EMPLOYEE_ID));
+				allEmployeeDataToDisplay.add(employee);
+				}
 		} catch (ClassNotFoundException | SQLException e) {
-
 			e.getMessage();
 		} finally {
 			ConnectionUtil.close(rs, pst1, connection);
 		}
+	
 		return allEmployeeDataToDisplay;
 	}
+	
 	
 	/**
 	 * This method gives a map of individual employee data of a particular employee in the database.

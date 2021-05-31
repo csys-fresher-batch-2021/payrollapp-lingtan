@@ -1,6 +1,7 @@
 package in.lingtan.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import in.lingtan.dao.EmployeeServiceDAO;
@@ -154,7 +155,7 @@ public class EmployeeService {
 	 * @throws SQLException
 	 */
 	
-	public Map<String, String> displayAllEmployees() throws ClassNotFoundException, SQLException{
+	public List<Employee> displayAllEmployees() throws ClassNotFoundException, SQLException{
 		return employeeServiceDAO.displayAllEmployees();
 		
 	}
