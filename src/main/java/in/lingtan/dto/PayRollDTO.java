@@ -9,7 +9,11 @@ public class PayRollDTO {
 		return "PayRollDTO [basicPay=" + basicPay + ", ctc=" + ctc + ", pfPercentage=" + pfPercentage + ", salary="
 				+ salary + ", employee=" + employee + ", role=" + role + ", pfAllowance=" + pfAllowance
 				+ ", medicalAllowance=" + medicalAllowance + ", travelAllowance=" + travelAllowance + ", hraAllowance="
-				+ hraAllowance + ", foodAllowance=" + foodAllowance + "]";
+				+ hraAllowance + ", foodAllowance=" + foodAllowance + ", annualBasicPay=" + annualBasicPay
+				+ ", annualPfPercentage=" + annualPfPercentage + ", annualSalary=" + annualSalary + ", annualCtc="
+				+ annualCtc + ", annualPfAllowance=" + annualPfAllowance + ", annualMedicalAllowance="
+				+ annualMedicalAllowance + ", annualTravelAllowance=" + annualTravelAllowance + ", annualHraAllowance="
+				+ annualHraAllowance + ", annualFoodAllowance=" + annualFoodAllowance + "]";
 	}
 	public PayRollDTO() {
 		super();
@@ -102,4 +106,69 @@ public class PayRollDTO {
 	private int hraAllowance ;
 	private int foodAllowance ;
 
+	
+	private int annualBasicPay ;
+	public int getAnnualBasicPay() {
+		return annualBasicPay;
+	}
+	public void setAnnualBasicPay(int annualBasicPay) {
+		this.annualBasicPay = annualBasicPay;
+	}
+	public int getAnnualPfPercentage() {
+		return annualPfPercentage;
+	}
+	public void setAnnualPfPercentage(int annualPfPercentage) {
+		this.annualPfPercentage = annualPfPercentage;
+	}
+	public int getAnnualSalary() {
+		return annualSalary;
+	}
+	public void setAnnualSalary(int annualSalary) {
+		this.annualSalary = annualSalary;
+	}
+	public int getAnnualCtc() {
+		return annualCtc;
+	}
+	public void setAnnualCtc(int annualCtc) {
+		this.annualCtc = annualCtc;
+	}
+	public int getAnnualPfAllowance() {
+		return annualPfAllowance;
+	}
+	public void setAnnualPfAllowance(int annualPfAllowance) {
+		this.annualPfAllowance = annualPfAllowance;
+	}
+	public int getAnnualMedicalAllowance() {
+		return annualMedicalAllowance;
+	}
+	public void setAnnualMedicalAllowance(int annualMedicalAllowance) {
+		this.annualMedicalAllowance = annualMedicalAllowance;
+	}
+	public int getAnnualTravelAllowance() {
+		return annualTravelAllowance;
+	}
+	public void setAnnualTravelAllowance(int annualTravelAllowance) {
+		this.annualTravelAllowance = annualTravelAllowance;
+	}
+	public int getAnnualHraAllowance() {
+		return annualHraAllowance;
+	}
+	public void setAnnualHraAllowance(int annualHraAllowance) {
+		this.annualHraAllowance = annualHraAllowance;
+	}
+	public int getAnnualFoodAllowance() {
+		return annualFoodAllowance;
+	}
+	public void setAnnualFoodAllowance(int annualFoodAllowance) {
+		this.annualFoodAllowance = annualFoodAllowance;
+	}
+
+	private int annualPfPercentage;	
+	private int annualSalary;
+	private int annualCtc;
+	private int annualPfAllowance ;
+	private int annualMedicalAllowance ;
+	private int annualTravelAllowance ;
+	private int annualHraAllowance ;
+	private int annualFoodAllowance ;
 }

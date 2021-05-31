@@ -24,7 +24,17 @@ public class PayRollServiceDAO {
 	private static final String PF_PERCENTAGE ="pf_percentage";
 	private static final String SALARY ="salary";
 	private static final String CTC ="ctc";
+	private static final String ANNUAL_BASIC_PAY ="annual_basic_pay";
+	private static final String ANNUAL_HRA ="annual_hra";
+	private static final String ANNUAL_FOOD_ALLOWANCE ="annual_food_allowance";
+	private static final String ANNUAL_MEDICAL_ALLOWANCE ="annual_medical_allowance";
+	private static final String ANNUAL_PF ="annual_pf";
+	private static final String ANNUAL_TRAVEL_ALLOWANCE ="annual_travel_allowance";
+	private static final String ANNUAL_SALARY ="annual_salary";
+	private static final String ANNUAL_CTC ="annual_ctc";
 	
+
+
 	
 	/**
 	 * This method updates the database with the payroll data recieved  from the payroll service class
@@ -133,7 +143,18 @@ public class PayRollServiceDAO {
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-			String sql = "select e.name,mobile_number,employee_id,e.role, p.basic_pay,hra,pf,medical_allowance, food_allowance, travel_allowance,salary,ctc from employee_data e, payroll_data p where (e.role = p.role) and employee_id=?";
+			String sql = "select e.name,mobile_number,employee_id,e.role, \r\n"
+					+ "p.basic_pay,p.basic_pay*12 as annual_basic_pay,\r\n"
+					+ "hra,hra*12 as annual_hra,\r\n"
+					+ "pf ,pf*12 as annual_pf,\r\n"
+					+ "medical_allowance, medical_allowance*12 as annual_medical_allowance,\r\n"
+					+ "food_allowance, food_allowance*12 as annual_food_allowance,\r\n"
+					+ "travel_allowance, travel_allowance*12 as annual_travel_allowance ,\r\n"
+					+ "salary, salary*12 as annual_salary ,\r\n"
+					+ "ctc, ctc*12 as annual_ctc\r\n"
+					+ "from employee_data e, payroll_data p \r\n"
+					+ "where (e.role = p.role) and employee_id=?";
+			
 			pst = connection.prepareStatement(sql);
 			pst.setString(1, role);
 			rs = pst.executeQuery();
@@ -153,7 +174,15 @@ public class PayRollServiceDAO {
 				payRoll.setMedicalAllowance(rs.getInt(MEDICAL_ALLOWANCE));
 				payRoll.setPfAllowance(rs.getInt(PF));
 				payRoll.setTravelAllowance(rs.getInt(TRAVEL_ALLOWANCE));
-				
+				payRoll.setAnnualBasicPay(rs.getInt(ANNUAL_BASIC_PAY));
+				payRoll.setAnnualHraAllowance(rs.getInt(ANNUAL_HRA));
+				payRoll.setAnnualFoodAllowance(rs.getInt(ANNUAL_FOOD_ALLOWANCE));
+				payRoll.setAnnualMedicalAllowance(rs.getInt(ANNUAL_MEDICAL_ALLOWANCE));
+				payRoll.setAnnualPfAllowance(rs.getInt(ANNUAL_PF));
+				payRoll.setAnnualTravelAllowance(rs.getInt(ANNUAL_TRAVEL_ALLOWANCE));
+				payRoll.setAnnualSalary(rs.getInt(ANNUAL_SALARY));
+				payRoll.setAnnualCtc(rs.getInt(ANNUAL_CTC));
+	
 				payRoll.setSalary(rs.getInt(SALARY));
 				payRoll.setCtc(rs.getInt(CTC));
 				
@@ -167,7 +196,6 @@ public class PayRollServiceDAO {
 		finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
-
 		return payRollDataForAnEmployee;
 	}
 

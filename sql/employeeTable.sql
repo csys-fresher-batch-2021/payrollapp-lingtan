@@ -11,3 +11,4 @@ joined_date date not null,
 password varchar(70) not null,
 gender varchar(70),
 active_status int not null) ;
+

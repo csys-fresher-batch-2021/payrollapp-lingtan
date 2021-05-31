@@ -11,7 +11,7 @@ font-weight:bold;
 border:none;
 }
 
-#grossCompensation,#grossCompensationLabel, #ctcLabel, #ctc{
+#grossCompensation,#grossCompensationLabel, #ctcLabel, #ctc, #annualGrossCompensation, #annualCtc{
 background-color:#34495E;
 color:white;
 }
@@ -53,6 +53,7 @@ padding:20px;
 			<tr>
 				<th scope="col">Salary Components</th>
 				<th scope="col">Monthly (Rs)</th>
+				<th scope="col">Yearly (Rs)</th>
 		
 			</tr>
 			
@@ -65,27 +66,34 @@ padding:20px;
 			<tr>
 				<td>Basic Pay</td>
 				<td id="basicPay"></td>
+				<td id="annualBasicPay"></td>
+				
 			</tr>
 			<tr>
 				<td>HRA</td>
 				<td id="hra"></td>
+				<td id="annualHra"></td>
 			</tr>
 			<tr>
 				<td>Food Allowance</td>
 				<td id="food"></td>
+				<td id="annualFoodAllowance"></td>
 			</tr>
 			<tr>
 				<td>Medical Allowance</td>
 				<td id="medical"></td>
+				<td id="annualMedicalAllowance"></td>
 			</tr>
 				<tr>
 				<td>Travel Allowance</td>
 				<td id="travel"></td>
+				<td id="annualTravelAllowance"></td>
 			</tr>
 			<tr>
 	
 				<td id="grossCompensationLabel"><h5>Gross Compensation (A)</h5></td>
 				<td id="grossCompensation"></td>
+				<td id="annualGrossCompensation"></td>
 			</tr>
 			<tr>
 				<td id="heading2">Retiral Benefits</td>
@@ -94,10 +102,12 @@ padding:20px;
 			<tr>
 				<td>Provident Fund</td>
 				<td id="pf"></td>
+				<td id="annualPf"></td>
 			</tr>
 			<tr>
 				<td id="ctcLabel" >Cost To the Company (CTC=A+B)</td>
 				<td id="ctc"></td>
+				<td id="annualCtc"></td>
 			</tr>		
 		</tbody>
 	</table>
@@ -117,7 +127,7 @@ function getPaySlipFromServlet(employeeId){
 	
 	fetch(url,{method:'post'}).then(res=> res.json()).then(res=>{
 		let data = res;
-		
+		console.log(res);
 		
 		for(let payData of data){
 			document.getElementById('name').innerHTML = (payData.employee.name);
@@ -132,6 +142,16 @@ function getPaySlipFromServlet(employeeId){
 			document.getElementById('grossCompensation').innerHTML = (payData.salary);
 			document.getElementById('pf').innerHTML = (payData.pfAllowance);
 			document.getElementById('ctc').innerHTML = (payData.ctc);
+			
+			document.getElementById('annualBasicPay').innerHTML = (payData.annualBasicPay);
+			document.getElementById('annualHra').innerHTML = (payData.annualHraAllowance);
+			document.getElementById('annualPf').innerHTML = (payData.annualPfAllowance);
+			document.getElementById('annualFoodAllowance').innerHTML = (payData.annualFoodAllowance);
+			document.getElementById('annualTravelAllowance').innerHTML = (payData.annualTravelAllowance);
+			document.getElementById('annualMedicalAllowance').innerHTML = (payData.annualMedicalAllowance);
+			document.getElementById('annualGrossCompensation').innerHTML = (payData.annualSalary);
+			document.getElementById('annualCtc').innerHTML = (payData.annualCtc);
+			
 			document.getElementById('paySlipTitle').innerHTML = "Pay Slip of "+(payData.employee.employeeID);
 		}
 		console.log("pay slip data");
