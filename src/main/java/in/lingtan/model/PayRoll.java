@@ -1,7 +1,7 @@
 package in.lingtan.model;
 
 public class PayRoll {
-	private int ctc;
+	
 	
 	public int getCtc() {
 		return ctc;
@@ -53,8 +53,7 @@ public class PayRoll {
 		this.role = role;
 	}
 	
-	private int basicPay ;
-	private int pfPercentage;
+	
 	public int getPfPercentage() {
 		return pfPercentage;
 	}
@@ -68,13 +67,17 @@ public class PayRoll {
 		this.salary = salary;
 	}
 
-	private int salary;
+	
 	@Override
 	public String toString() {
-		return "PayRoll [ctc=" + ctc + ", basicPay=" + basicPay + ", pfPercentage=" + pfPercentage + ", salary="
-				+ salary + ", employee=" + employee + ", pfAllowance=" + pfAllowance + ", medicalAllowance="
+		return "PayRoll [employee=" + employee + ", basicPay=" + basicPay + ", pfPercentage=" + pfPercentage
+				+ ", salary=" + salary + ", ctc=" + ctc + ", pfAllowance=" + pfAllowance + ", medicalAllowance="
 				+ medicalAllowance + ", travelAllowance=" + travelAllowance + ", hraAllowance=" + hraAllowance
-				+ ", foodAllowance=" + foodAllowance + ", role=" + role + "]";
+				+ ", foodAllowance=" + foodAllowance + ", role=" + role + ", annualBasicPay=" + annualBasicPay
+				+ ", annualPfPercentage=" + annualPfPercentage + ", annualSalary=" + annualSalary + ", annualCtc="
+				+ annualCtc + ", annualPfAllowance=" + annualPfAllowance + ", annualMedicalAllowance="
+				+ annualMedicalAllowance + ", annualTravelAllowance=" + annualTravelAllowance + ", annualHraAllowance="
+				+ annualHraAllowance + ", annualFoodAllowance=" + annualFoodAllowance + "]";
 	}
 	
 	private Employee employee;
@@ -85,10 +88,82 @@ public class PayRoll {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	
+	private int basicPay ;
+	private int pfPercentage;	
+	private int salary;
+	private int ctc;
 	private int pfAllowance ;
 	private int medicalAllowance ;
 	private int travelAllowance ;
 	private int hraAllowance ;
 	private int foodAllowance ;
 	private String role;
+	
+	public int getAnnualBasicPay() {
+		return annualBasicPay;
+	}
+	public void setAnnualBasicPay(int annualBasicPay) {
+		this.annualBasicPay = annualBasicPay;
+	}
+	public int getAnnualPfPercentage() {
+		return annualPfPercentage;
+	}
+	public void setAnnualPfPercentage(int annualPfPercentage) {
+		this.annualPfPercentage = annualPfPercentage;
+	}
+	public int getAnnualSalary() {
+		return annualSalary;
+	}
+	public void setAnnualSalary(int annualSalary) {
+		this.annualSalary = annualSalary;
+	}
+	public int getAnnualCtc() {
+		return annualCtc;
+	}
+	public void setAnnualCtc(int annualCtc) {
+		this.annualCtc = annualCtc;
+	}
+	public int getAnnualPfAllowance() {
+		return annualPfAllowance;
+	}
+	public void setAnnualPfAllowance(int annualPfAllowance) {
+		this.annualPfAllowance = annualPfAllowance;
+	}
+	public int getAnnualMedicalAllowance() {
+		return annualMedicalAllowance;
+	}
+	public void setAnnualMedicalAllowance(int annualMedicalAllowance) {
+		this.annualMedicalAllowance = annualMedicalAllowance;
+	}
+	public int getAnnualTravelAllowance() {
+		return annualTravelAllowance;
+	}
+	public void setAnnualTravelAllowance(int annualTravelAllowance) {
+		this.annualTravelAllowance = annualTravelAllowance;
+	}
+	public int getAnnualHraAllowance() {
+		return annualHraAllowance;
+	}
+	public void setAnnualHraAllowance(int annualHraAllowance) {
+		this.annualHraAllowance = annualHraAllowance;
+	}
+	public int getAnnualFoodAllowance() {
+		return annualFoodAllowance;
+	}
+	public void setAnnualFoodAllowance(int annualFoodAllowance) {
+		this.annualFoodAllowance = annualFoodAllowance;
+	}
+
+	private int annualBasicPay ;
+	private int annualPfPercentage;	
+	private int annualSalary;
+	private int annualCtc;
+	private int annualPfAllowance ;
+	private int annualMedicalAllowance ;
+	private int annualTravelAllowance ;
+	private int annualHraAllowance ;
+	private int annualFoodAllowance ;
+	
+	
 }

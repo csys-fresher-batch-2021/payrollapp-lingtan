@@ -41,6 +41,8 @@ public class PayRollService {
 		payRoll.setCtc(calculatedCtc);
 		
 		
+		
+		
 		return payRollServiceDAO.update(payRoll);
 		
 		
@@ -74,9 +76,12 @@ public class PayRollService {
 			payRollDTO.setRole(payRollData.getRole());
 			payRollDTO.setSalary(payRollData.getSalary());
 			payRollDTO.setCtc(payRollData.getCtc());
+			
+			
 			payRollDataArrayForServlet.add(payRollDTO);
 			
 		}
+		
 		return payRollDataArrayForServlet;	
 	}
 	
@@ -112,10 +117,21 @@ public class PayRollService {
 			payRollDTO.setFoodAllowance(payRollData.getFoodAllowance());
 			payRollDTO.setSalary(payRollData.getSalary());
 			payRollDTO.setCtc(payRollData.getCtc());
+			
+			payRollDTO.setAnnualBasicPay(payRollData.getAnnualBasicPay());
+			payRollDTO.setAnnualHraAllowance(payRollData.getAnnualHraAllowance());
+			payRollDTO.setAnnualPfAllowance(payRollData.getAnnualPfAllowance());
+			payRollDTO.setAnnualMedicalAllowance(payRollData.getAnnualMedicalAllowance());
+			payRollDTO.setAnnualTravelAllowance(payRollData.getAnnualTravelAllowance());
+			payRollDTO.setAnnualFoodAllowance(payRollData.getAnnualFoodAllowance());
+			
+			payRollDTO.setAnnualSalary(payRollData.getAnnualSalary());
+			payRollDTO.setAnnualCtc(payRollData.getAnnualCtc());
+		
 			payRollDataForEmployeeToServlet.add(payRollDTO);
 				
 		}
-		
+		System.out.println("In Service--"+payRollDataForEmployeeToServlet);
 		return payRollDataForEmployeeToServlet;
 	}
 	
