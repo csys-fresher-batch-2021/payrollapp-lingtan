@@ -39,7 +39,7 @@ public class DisplayAllEmployeeServlet extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmployeeService employeeService = new EmployeeService();
-		System.out.println("hello");
+		
 	
 		try {
 			List<Employee> employeeList = employeeService.displayAllEmployees();
@@ -55,7 +55,7 @@ public class DisplayAllEmployeeServlet extends HttpServlet {
 			obj.addProperty("ERROR",e.getMessage() );
 			out.println(obj);
 			out.flush();
-			e.printStackTrace();
+
 		}
 		
 	
