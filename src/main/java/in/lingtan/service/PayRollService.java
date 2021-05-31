@@ -131,7 +131,6 @@ public class PayRollService {
 			payRollDataForEmployeeToServlet.add(payRollDTO);
 				
 		}
-		System.out.println("In Service--"+payRollDataForEmployeeToServlet);
 		return payRollDataForEmployeeToServlet;
 	}
 	

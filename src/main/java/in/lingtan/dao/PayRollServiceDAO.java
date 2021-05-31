@@ -143,7 +143,6 @@ public class PayRollServiceDAO {
 		ResultSet rs = null;
 		try {
 			connection = ConnectionUtil.getConnection();
-		//	String sql = "select e.name,mobile_number,employee_id,e.role, p.basic_pay,hra,pf,medical_allowance, food_allowance, travel_allowance,salary,ctc from employee_data e, payroll_data p where (e.role = p.role) and employee_id=?";
 			String sql = "select e.name,mobile_number,employee_id,e.role, \r\n"
 					+ "p.basic_pay,p.basic_pay*12 as annual_basic_pay,\r\n"
 					+ "hra,hra*12 as annual_hra,\r\n"
@@ -197,7 +196,6 @@ public class PayRollServiceDAO {
 		finally {
 			ConnectionUtil.close(rs, pst, connection);
 		}
-		System.out.println("In dao----"+payRollDataForAnEmployee);
 		return payRollDataForAnEmployee;
 	}
 
