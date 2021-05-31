@@ -1,19 +1,16 @@
 package in.lingtan.model;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Employee {
 
 	@Override
 	public String toString() {
 		return "Employee [name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role
-				+ ", employeeID=" + employeeID + ", password=" + password + ", email=" + email + ", dob=" + dob
-				+ ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", joiningDate=" + joiningDate
-				+ ", activeStatus=" + activeStatus + ", basicPay=" + basicPay + ", salary=" + salary + ", pf=" + pf
-				+ ", attendance=" + attendance + ", present=" + present + ", absent=" + absent
-				+ ", attendanceStatusForADate=" + attendanceStatusForADate + ", attendanceMap=" + attendanceMap + "]";
+				+ ", employeeID=" + employeeID + ", email=" + email + ", dob=" + dob + ", gender=" + gender
+				+ ", mobileNumber=" + mobileNumber + ", joiningDate=" + joiningDate + ", activeStatus=" + activeStatus
+				+ ", basicPay=" + basicPay + ", salary=" + salary + ", pf=" + pf + "]";
 	}
 
 	public String getFirstName() {
@@ -112,45 +109,7 @@ public class Employee {
 		this.pf = pf;
 	}
 
-	public int getAttendance() {
-		return attendance;
-	}
-
-	public void setAttendance(int attendance) {
-		this.attendance = attendance;
-	}
-
-	public int getPresent() {
-		return present;
-	}
-
-	public void setPresent(int present) {
-		this.present = present;
-	}
-
-	public int getAbsent() {
-		return absent;
-	}
-
-	public void setAbsent(int absent) {
-		this.absent = absent;
-	}
-
-	public String getAttendanceStatusForADate() {
-		return attendanceStatusForADate;
-	}
-
-	public void setAttendanceStatusForADate(String attendanceStatusForADate) {
-		this.attendanceStatusForADate = attendanceStatusForADate;
-	}
-
-	public Map<LocalDate, Integer> getAttendanceMap() {
-		return attendanceMap;
-	}
-
-	public void setAttendanceMap(Map<LocalDate, Integer> attendanceMap) {
-		this.attendanceMap = attendanceMap;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -193,10 +152,6 @@ public class Employee {
 	private int basicPay;
 	private double salary;
 	private double pf;
-	private int attendance;
-	private int present;
-	private int absent;
-	private String attendanceStatusForADate;
-	private Map<LocalDate, Integer> attendanceMap = new HashMap<>();
+	
 
 }

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -21,7 +21,7 @@ public class EmployeeServiceTestCase {
 	@After
 	public void resetData() throws ClassNotFoundException, SQLException{
 		
-		Map<String, String> employeeMap = employeeService.displayAllEmployees();
+		List<Employee> employeeMap = employeeService.displayAllEmployees();
 		employeeMap.clear();
 	}
 		

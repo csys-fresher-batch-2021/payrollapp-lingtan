@@ -28,7 +28,6 @@ public class PaySlipGenerationForEmployeeIdServlet extends HttpServlet {
      */
     public PaySlipGenerationForEmployeeIdServlet() {
         super();
-
     }
 
 	/**

@@ -32,7 +32,7 @@
 
 		
 			<tr>
-			<th scope="col"><h3 style = "color:green"><%= employee.getFirstName()%></h3></th>
+			<th class="thead-dark" scope="col"><h3 style = "color:green"><%= employee.getFirstName()%></h3></th>
 			</tr>
 			<tr>
 				<th scope="row">Employee Name</th>
@@ -43,6 +43,10 @@
 				<td ><%= employee.getEmployeeID()%></td>
 			</tr>
 			<tr>
+				<th scope="row">Email</th>
+				<td id="email"><%= employee.getEmail()%></td>
+			</tr>
+		
 			<tr>
 				<th scope="row">Role</th>
 				<td><%= employee.getRole()%></td>
