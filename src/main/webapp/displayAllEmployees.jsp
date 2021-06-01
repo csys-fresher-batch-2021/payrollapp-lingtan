@@ -56,6 +56,10 @@ opacity:90%;
 			</div>
 		</div>
 		<br/>
+		<div class=" d-flex justify-content-left">
+					<a href="" onclick="clearFilters()" class="btn btn-primary" class="form-control form-control-sm">Clear Filters</a>
+				</div>
+		<br/>
 		<table id="employeeTable" class="table" border="1">
 
 			<caption>List of Employees in a company</caption>
@@ -84,7 +88,7 @@ function search(){
 	let gender = document.getElementById("gender").value;
 	let role = document.getElementById("role").value;
 	let sort = document.getElementById("alphabetical").value;
-	console.log(sort);
+	
 	let url = "DisplayAllEmployeeServlet";
 	fetch(url).then(res=>res.json()).then(res=>{
 
@@ -177,6 +181,17 @@ function search(){
 			event.preventDefault();
 		}
 	}
+	/**
+	*This method clears the selection and makes the dropdown to go default.
+	*/
+	function clearFilters(){
+		event.preventDefault();
+		document.getElementById("gender").selectedIndex = "0";
+		document.getElementById("role").selectedIndex = "0";
+		document.getElementById("alphabetical").selectedIndex = "0";	
+		search();
+	}
+	
 	
 </script>
 </body>
