@@ -27,7 +27,7 @@ public class EmployeeServiceDAO {
 	private static final String ACTIVE_STATUS = "active_status";
 	private static final String INSERT_EMPLOYEE_DATA_QUERY = "insert into employee_data (first_name,last_name,name,role ,mobile_number,email_id,employee_id,dob,joined_date,password,gender,active_status) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String IS_EMPLOYEE_AVAILABLE_QUERY = "select last_name,mobile_number,active_status,employee_id from employee_data";
-	private static final String DISPLAY_ALL_EMPLOYEES_QUERY = "select first_name,employee_id from employee_data where active_status=1";
+	private static final String DISPLAY_ALL_EMPLOYEES_QUERY = "select first_name,gender,role,employee_id from employee_data where active_status=1";
 	private static final String DISPLAY_INDIVIDUAL_EMPLOYEES_DATA_QUERY = "select first_name,name,employee_id,mobile_number,email_id,gender,role,dob,joined_date from employee_data where employee_id=?";
 	private static final String DELETE_EMPLOYEE_QUERY = "update employee_data set active_status=0 where employee_id=?";
 	private static final String SET_EMPLOYEE_ACTIVE_QUERY = "update employee_data set active_status=1 where employee_id=?";
@@ -180,6 +180,9 @@ public List<Employee> displayAllEmployees() throws ClassNotFoundException, SQLEx
 				Employee employee = new Employee();
 				employee.setName(rs.getString(FIRST_NAME));
 				employee.setEmployeeID(rs.getString(EMPLOYEE_ID));
+				employee.setGender(rs.getString(GENDER));
+				employee.setRole(rs.getString(ROLE));
+				
 				allEmployeeDataToDisplay.add(employee);
 				}
 		} catch (ClassNotFoundException | SQLException e) {
