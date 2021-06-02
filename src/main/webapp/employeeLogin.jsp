@@ -42,7 +42,7 @@ font-size:14px;
 
 		<div class=" d-flex justify-content-center">
 				<div class="md=4 row">
-					<input type="submit" class="btn btn-primary" class="form-control form-control-sm">
+					<input type="submit" value="Login" class="btn btn-primary" class="form-control form-control-sm">
 				</div>
 			</div><br/>
 			<div class="d-flex justify-content-center">
@@ -97,15 +97,28 @@ exampleForm.addEventListener("submit", loginValidation);
 		let url = "EmployeeLogin?"+params;
 		
 		fetch(url,{ method:'POST'}).then(res => res.json()).then(res=>{
-			console.log(res);
+			
 			if(res.IS_VALID==true){
+				localStorage.setItem("employeeId",employeeId);
 				window.location.href="employeePortal.jsp";
 			}
 			else if(res.IS_VALID!=null){
 				document.getElementById('errorMessage').innerHTML = (res.IS_VALID);
 			}
-		})
-		};
+		});
+		}
+	
+	
+		/**
+		* This block of code automatically makes the page to reload whenever navigated
+		*/		 
+		const [entry] = performance.getEntriesByType("navigation");
+		if (entry["type"] === "back_forward")
+		location.reload();
+		
+	    function preventBack() { window.history.forward(); }  
+	    setTimeout("preventBack()", 0);  
+	    window.onunload = function () { null };  
 </script>
 </form>
 </main>

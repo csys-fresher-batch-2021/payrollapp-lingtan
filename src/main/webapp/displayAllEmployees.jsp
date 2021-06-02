@@ -8,6 +8,14 @@
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
 <head>
+<%String employeeId = (String) session.getAttribute("ADMIN_ID");
+if (employeeId == null) {
+	response.sendRedirect("adminLogin.jsp");
+} 
+%>
+	
+	
+	
 <style>
 #searchEmployee {
 width: 250px;
@@ -164,8 +172,8 @@ function search(){
 		    	tableData+= '<td>' + filteredData[i].employeeID + '</td>';
 		    	tableData+= '<td>' + filteredData[i].role + '</td>';
 		    	tableData+= '<td>' + filteredData[i].gender + '</td>';
-		    	tableData+= '<td><a href="displayIndividualEmployeeData.jsp?employeeId='+filteredData[i].employeeID+'"">Profile</a></td>';
-		    	tableData+= '<td><a href="DeleteEmployeeServlet?employeeId='+filteredData[i].employeeID+'"" onclick="confirmDelete()" >Delete</a></td>';		        
+		    	tableData+= '<td><a href="displayIndividualEmployeeData.jsp?employeeId='+filteredData[i].employeeID+'"" class="btn btn-primary">Profile</a></td>';
+		    	tableData+= '<td><a href="DeleteEmployeeServlet?employeeId='+filteredData[i].employeeID+'"" onclick="confirmDelete()" class="btn btn-danger" >Delete</a></td>';		        
 		    	tableData+= '</tr>';
 		    }
 			tableData+='</tbody>';
@@ -188,11 +196,17 @@ function search(){
 		event.preventDefault();
 		document.getElementById("gender").selectedIndex = "0";
 		document.getElementById("role").selectedIndex = "0";
-		document.getElementById("alphabetical").selectedIndex = "0";	
+		document.getElementById("alphabetical").selectedIndex = "0";
+		document.getElementById("searchEmployee").value = "";
+		
 		search();
 	}
-	
-	
+/**
+ * This block of code automatically makes the page to reload whenever navigated
+ */
+	const [entry] = performance.getEntriesByType("navigation");
+	if (entry["type"] === "back_forward")
+	location.reload();	
 </script>
 </body>
 </html>

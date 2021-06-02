@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%
+String employeeLoginId = (String)session.getAttribute("EMPLOYEE_LOGIN_USERNAME");
+if(employeeLoginId==null){
+	response.sendRedirect("employeeLogin.jsp");
+}
+
+%>
 <meta charset="ISO-8859-1">
 <title>Employee Portal</title>
 </head>
@@ -48,9 +55,22 @@
 		
 		<div class=" d-flex justify-content-center">
 				<div class="md=4 row">
-					<input type="submit" onclick="checkPasswordMatch()" class="btn btn-primary" class="form-control form-control-sm">
+					<input type="submit" value="Change Password" onclick="checkPasswordMatch()" class="btn btn-success" class="form-control form-control-sm">
 				</div>
 		</div>
+		<br/>
+		<div class=" d-flex justify-content-center">
+				<div class="md=4 row">
+					<a href="employeePortal.jsp" class="btn btn-danger" onclick="cancel()" class="form-control form-control-sm">Cancel</a>
+				</div>
+		</div>
+		<br/>
+		<div class=" d-flex justify-content-center">
+				<div class="md=4 row">
+					<a href="employeePortal.jsp" class="btn btn-primary"  class="form-control form-control-sm">Employee Portal</a>
+				</div>
+		</div>
+			
 			
 <script type="text/javascript">
 /**
@@ -115,6 +135,7 @@
 								
 				if(res.IS_CHANGED==true){
 					document.getElementById('message').innerHTML="<font color='green'>Successfully Changed Password</font>";
+					
 				}else{
 					document.getElementById('message').innerHTML="<font color='red'>"+(res.IS_CHANGED)+"</font>";
 				}
@@ -124,6 +145,20 @@
 			document.getElementById('message').innerHTML="<font color='red'>Password does not match</font>";
 	}	
 }
+	
+function cancel(){
+	event.preventDefault();
+	document.getElementById("employeeId").value="";
+	document.getElementById("oldPassword").value="";
+	document.getElementById("newPassword").value="";
+	document.getElementById("confirmPassword").value="";
+}
+/**
+* This block of code automatically makes the page to reload whenever navigated
+*/ 
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
 </script>
 
 </form>

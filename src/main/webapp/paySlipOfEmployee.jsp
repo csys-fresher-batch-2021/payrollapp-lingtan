@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%String employeeId = (String) session.getAttribute("ADMIN_ID");
+if (employeeId == null) {
+	response.sendRedirect("adminLogin.jsp");
+} 
+%>
 <meta charset="ISO-8859-1">
 <title></title>
 </head>
@@ -116,7 +121,13 @@ padding:20px;
 </main>
 
 <script>
+const [entry] = performance.getEntriesByType("navigation");
 
+if (entry["type"] === "back_forward"){
+ location.reload();
+ }
+ 
+ 
 /**
  *This method fetches the payroll data for a specifice employee from the servlet 
  *and gets a json data from the servlet, and writes those json data to the html. 

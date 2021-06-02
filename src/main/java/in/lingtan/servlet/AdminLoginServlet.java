@@ -43,8 +43,7 @@ public class AdminLoginServlet extends HttpServlet {
 			if (isValidAdmin) {
 				HttpSession session = request.getSession();
 				session.setAttribute("ADMIN_ID", adminUsername);
-				RequestDispatcher rd=request.getRequestDispatcher("adminPortal.jsp");  
-				rd.forward(request, response);
+				response.sendRedirect("adminPortal.jsp?username="+adminUsername);
 				
 			}else {
 				throw new InvalidCredentialsException("Invalid Admin Credentials");
