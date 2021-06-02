@@ -4,6 +4,15 @@
 <meta charset="ISO-8859-1">
 <title>Employee Portal</title>
 </head>
+<script> 
+/**
+ * This code block refreshes the page whenever navigated.
+ */
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
+
+</script>
 <body>
 	<jsp:include page="headerForEmployee.jsp"></jsp:include>
 	<main class="container-fluid">
@@ -13,7 +22,10 @@
 				
 			<%
 			String employeeLoginId = (String)session.getAttribute("EMPLOYEE_LOGIN_USERNAME");
-			
+			if(employeeLoginId==null){
+				response.sendRedirect("employeeLogin.jsp");
+			}%>
+			<%
 			out.println("<h4>" + " Welcome - " + employeeLoginId + "</h4>");
 			%>
 			</div>

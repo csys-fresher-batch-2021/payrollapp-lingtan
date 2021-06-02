@@ -4,6 +4,11 @@
 
 <html lang="en">
 <head>
+<%String employeeId = (String) session.getAttribute("ADMIN_ID");
+if (employeeId == null) {
+	response.sendRedirect("adminLogin.jsp");
+}
+%>
 <meta charset="ISO-8859-1">
 <title>Register Employee</title>
 </head>
@@ -14,11 +19,9 @@
 	<div class="d-flex justify-content-center">
 		<h3>Employee Registration</h3>
 	</div>
-	<div class="btn-group-vertical pull-right">
-		<div class="row">
-			<div class="form-group col-md-2">
+	<div class="row">
+		<div class="form-group col-md-2">
 			<a href="displayAllEmployees.jsp" class="btn btn-primary">Display Employees</a>
-		</div>
 		</div>
 	</div>
 	
@@ -128,7 +131,14 @@
 
 </form>
 
+<script type="text/javascript">
 
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward"){
+location.reload();
+}
+
+</script>
 </main>
 
 </body>

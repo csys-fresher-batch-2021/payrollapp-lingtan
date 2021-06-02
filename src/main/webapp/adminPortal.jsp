@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%String employeeId = (String) session.getAttribute("ADMIN_ID");
+if(employeeId==null){
+	response.sendRedirect("adminLogin.jsp");
+}
+
+
+%>
 <meta charset="ISO-8859-1">
 
 <title>Admin portal</title>
@@ -21,7 +28,6 @@ font-weight:bold;
 	<div class="d-flex justify-content-center">
 		<h4>
 			<%
-			String employeeId = (String) session.getAttribute("ADMIN_ID");
 			out.println("<h4>" + " Welcome " + employeeId + "</h4>");
 			%>
 		</h4>
@@ -57,8 +63,28 @@ font-weight:bold;
 </div>
 </div>
 
-	</main>
+</main>
+<script>
 
+/**
+ * This method gets the parameter from the url and calls the fetch function as parameter.
+ */
+let params = new URLSearchParams(window.location.search);
+
+let adminUsername = params.get('username');
+
+localStorage.setItem("adminUsername",adminUsername);
+
+if(localStorage.getItem("adminUsername")==null){
+	window.location.href="index.jsp";
+}
+/**
+ * This block of code automatically makes the page to reload whenever navigated
+ */ 
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
+</script>
 
 </body>
 </html>

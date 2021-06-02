@@ -6,10 +6,17 @@
 <%@page import="java.security.KeyStore.Entry"%>
 <html lang="en">
 <head>
+
 <meta charset="ISO-8859-1">
 <title>Employee Data</title>
 </head>
 <body>
+<%String employeeIdLoggedIn = (String) session.getAttribute("ADMIN_ID");
+if(employeeIdLoggedIn==null){
+	response.sendRedirect("adminLogin.jsp");
+}
+%>
+
 			<%
 			String employeeId = request.getParameter("employeeId");
 			EmployeeService employeeService = new EmployeeService();
@@ -84,7 +91,12 @@ function generatePaySlipForEmployee(){
 	window.location.href="paySlipOfEmployee.jsp?employeeId="+employeeId;
 }
 
-
+/**
+ * This block of code automatically makes the page to reload whenever navigated
+ */
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
 
 </script>
 

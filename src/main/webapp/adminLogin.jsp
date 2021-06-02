@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type = "text/javascript" >  
+    function preventBack() { window.history.forward(); }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () { null };  
+    
+
+ 
+</script> 
 <meta charset="ISO-8859-1">
 <title>Admin Portal</title>
 </head>
-<body>
+<body >
+
+<%
+String employeeId = (String) session.getAttribute("ADMIN_ID");
+ %>
+
+
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 	<br/>
@@ -54,7 +68,8 @@
 					<br> <a href="employeeLogin.jsp" >Employee Login</a>
 				</div>
 			</div>
-	<script type="text/javascript">
+<script type="text/javascript">
+
 		function login(){
 			let loginForm = document.querySelector("#loginForm");
 			let adminUsername = document.querySelector("#adminUsername");
@@ -73,7 +88,14 @@
 				adminUsername.classList.add("is-valid");
 			}			
 		}
-	</script>
+		
+/**
+* This block of code automatically makes the page to reload whenever navigated
+*/		 
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
+</script>
 
 		</form>
 		

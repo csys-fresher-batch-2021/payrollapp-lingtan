@@ -7,6 +7,12 @@
 
 <html lang="en">
 <head>
+<%String employeeId = (String) session.getAttribute("ADMIN_ID");
+if (employeeId == null) {
+	response.sendRedirect("adminLogin.jsp");
+}
+%>
+
 <meta charset="ISO-8859-1">
 <title>Salary Modification</title>
 </head>
@@ -220,6 +226,13 @@ function saveRole(){
 	let roleOnSubmit = document.getElementById('Role').value;
 	localStorage.setItem("ROLE_ON_SUBMIT",roleOnSubmit);
 }
+/**
+ * This block of code automatically makes the page to reload whenever navigated
+ */
+
+const [entry] = performance.getEntriesByType("navigation");
+if (entry["type"] === "back_forward")
+location.reload();
 </script>
 
 </body>

@@ -6,6 +6,7 @@
 <title>Employee Payroll</title>
 </head>
 <body>
+<%session.invalidate(); %>
 	<jsp:include page="header.jsp"></jsp:include>
 <br/>
 	<main class="container-fluid">
@@ -16,5 +17,12 @@
 	</div>
 
 	</main>
+<script type="text/javascript">
+const [entry] = performance.getEntriesByType("navigation");
+
+if (entry["type"] === "back_forward"){
+ location.reload();
+ }
+</script>
 </body>
 </html>
