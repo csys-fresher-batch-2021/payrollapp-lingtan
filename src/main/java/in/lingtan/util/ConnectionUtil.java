@@ -29,7 +29,6 @@ public class ConnectionUtil {
 		
 		return DriverManager.getConnection(url, username, password);
 		
-	//org.postgresql.Driver  jdbc:postgresql://localhost/employeedb postgres @Lingtan1112
 	}
 	
 	/**
