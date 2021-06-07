@@ -7,7 +7,8 @@ if (employeeId == null) {
 } 
 %>
 <meta charset="ISO-8859-1">
-<title></title>
+<title>Payslip</title>
+<link rel="stylesheet" href="assets/css/adminPortal.css">
 </head>
 <style>
 #paySlipTable{
@@ -41,12 +42,19 @@ text-align: center;
 padding:20px;
 }
 
+.pageTitle{
+margin-bottom:0px;
+}
+
 </style>
 
 <body onload="onLoadGetId()">
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="pageTitle" class="d-flex justify-content-center">
+	 	<h4 class="pageTitleText">Pay-Slip Portal</h4>
+	 </div>
 	<main class="container-fluid">
-	<h3 id="paySlipTitle"></h3>
+	
 <br/>
 <p id="nameLabel">Name</p><h5 id="name"></h5>
 <p id="employeeIdLabel">Employee-ID</p><h5 id="employeeId"></h5>
@@ -138,7 +146,7 @@ function getPaySlipFromServlet(employeeId){
 	
 	fetch(url,{method:'post'}).then(res=> res.json()).then(res=>{
 		let data = res;
-		console.log(res);
+	
 		
 		for(let payData of data){
 			document.getElementById('name').innerHTML = (payData.employee.name);
@@ -163,10 +171,10 @@ function getPaySlipFromServlet(employeeId){
 			document.getElementById('annualGrossCompensation').innerHTML = (payData.annualSalary);
 			document.getElementById('annualCtc').innerHTML = (payData.annualCtc);
 			
-			document.getElementById('paySlipTitle').innerHTML = "Pay Slip of "+(payData.employee.employeeID);
+			//document.getElementById('paySlipTitle').innerHTML = "Pay Slip of "+(payData.employee.employeeID);
 		}
-		console.log("pay slip data");
-		console.log(data);
+	
+	
 	})
 }
 
@@ -182,7 +190,6 @@ function onLoadGetId(){
 }
 </script>
 
-<body>
 
 </body>
 </html>

@@ -16,8 +16,9 @@ if (employeeId == null) {
 <meta charset="ISO-8859-1">
 <title>Salary Modification</title>
 </head>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <style type="text/css">
+
 #estimatedSalary{
 color:black;
 background-color : lightgreen;
@@ -62,10 +63,7 @@ height:    80px;
 	<div class="d-flex justify-content-center">
 		<h3>Pay Roll - Portal</h3>
 	</div>
-	
-
-	
-	
+		
 <form action="AddPayServlet" id="AddPayServlet" method="post">
 	
 	<%String infoMessage = request.getParameter("infoMessage");
@@ -169,11 +167,11 @@ height:    80px;
 function getSalaryDataForRole(roleToDisplay){
 	
 	console.log("Fetching PayRoll Data");
-	let url = "AddPayServlet?roleToDisplay="+roleToDisplay;
-	fetch(url).then(res=> res.json()).then(res=>{
-		console.log(res);
+	let url = "GetPayDataForRoleServlet?roleToDisplay="+roleToDisplay;
+	axios.post(url).then(res=> {
+		
 		let payRollData = res;
-		for(let data of payRollData){
+		for(let data of payRollData.data){
 	
 			document.getElementById('Role').value = (data.role);
 			document.getElementById('basicPay').value = (data.basicPay);
@@ -219,6 +217,7 @@ function displayRoleBasedPay(){
 	let roleToDisplay = document.getElementById('Role').value;
 	getSalaryDataForRole(roleToDisplay);
 }
+
 /**
  * This method saves the last edit payroll data so next time when the portal opens it displays the data of the recently changed role.
  */
@@ -226,6 +225,7 @@ function saveRole(){
 	let roleOnSubmit = document.getElementById('Role').value;
 	localStorage.setItem("ROLE_ON_SUBMIT",roleOnSubmit);
 }
+
 /**
  * This block of code automatically makes the page to reload whenever navigated
  */
