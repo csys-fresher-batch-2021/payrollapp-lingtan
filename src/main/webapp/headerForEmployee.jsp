@@ -20,7 +20,7 @@ String employeeLoginId = (String)session.getAttribute("EMPLOYEE_LOGIN_USERNAME")
 
 <header>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="employeePortal.jsp">PayRoll-App</a>
+  <a class="navbar-brand" href="employeePortal.jsp">L10-Payroll</a>
   <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
       aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

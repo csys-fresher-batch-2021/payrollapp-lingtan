@@ -4,6 +4,7 @@
 
 <html lang="en">
 <head>
+<link rel="stylesheet" href="assets/css/adminPortal.css">
 <%String employeeId = (String) session.getAttribute("ADMIN_ID");
 if (employeeId == null) {
 	response.sendRedirect("adminLogin.jsp");
@@ -11,19 +12,35 @@ if (employeeId == null) {
 %>
 <meta charset="ISO-8859-1">
 <title>Register Employee</title>
+<style>
+
+.card{
+margin-top:10px;
+margin-left:-10px;
+margin-bottom:10px;
+height:70px;
+width:150px;
+}
+</style>
+
 </head>
 <body>
-
 <jsp:include page="header.jsp"></jsp:include>
+<div class="pageTitle" class="d-flex justify-content-center">
+	 	<h4 class="pageTitleText">Employee Registration</h4>
+	 </div>
 	<main class="container-fluid">
-	<div class="d-flex justify-content-center">
-		<h3>Employee Registration</h3>
-	</div>
-	<div class="row">
-		<div class="form-group col-md-2">
-			<a href="displayAllEmployees.jsp" class="btn btn-primary">Display Employees</a>
-		</div>
-	</div>
+	<div class="col">
+            <div class="card l-bg-green-dark">
+                <div class="card-statistic-3 p-4">
+                       <div class="card-icon card-icon-large"></div>
+                    	<div class="mb-4">
+                    	<a class="card-block stretched-link text-decoration-none" href="displayAllEmployees.jsp" ></a>
+                   			<h6 class="cardTitle">Display Employees</h6>
+                   		</div>
+                    </div>
+                </div>
+            </div>
 	
 	
 <form action="RegisterEmployeeServlet" method="post">
@@ -112,15 +129,15 @@ if (employeeId == null) {
 	</div>
 	
 	<div class="row">
-		<div class="form-group col-md-2">
+		<div class="form-group col-md-1">
 			<button class="btn btn-success">Register</button><br>
 		</div>
-		<div class="form-group col-md-2">
-			<a href="registerEmployee.jsp" class="btn btn-danger">Reset</a>
+		<div class="form-group col-md-0">
+			<button type="reset" class="btn btn-danger">Reset</button>
 		</div>
 
-		<div class="form-group col-md-2">
-			<a href="adminPortal.jsp" class="btn btn-primary">Admin Portal</a>
+		<div class="form-group col-md-1">
+			<a href="adminPortal.jsp" style="width:150px;" class="btn btn-primary">Admin Portal</a>
 		</div>
 	
 	</div>

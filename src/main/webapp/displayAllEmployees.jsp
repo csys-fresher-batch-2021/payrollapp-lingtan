@@ -1,39 +1,39 @@
 <!DOCTYPE>
 
-
-<%@page import="java.util.Map.Entry"%>
-<%@page import="in.lingtan.service.EmployeeService"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.ArrayList"%>
 <html lang="en">
 <head>
+
+
 <%String employeeId = (String) session.getAttribute("ADMIN_ID");
 if (employeeId == null) {
 	response.sendRedirect("adminLogin.jsp");
 } 
 %>
-	
-	
-	
 <style>
-#searchEmployee {
-width: 250px;
-background:lightgreen;
-opacity:90%;
+label{
+	margin-top:20px;
+	margin-bottom:0px;
 }
-</style>
+
+</style>	
+
+<link rel="stylesheet" href="assets/css/adminPortal.css">
+
+
 
 <title>Employee Payroll</title>
 </head>
 <body onload="search()">
 	<jsp:include page="header.jsp"></jsp:include>
-	<br />
+	<div class="pageTitle" class="d-flex justify-content-center">
+		<h4 class="pageTitleText">Employees in the Company</h4>
+	</div>
 	<main class="container-fluid">
-
-		<h3>Employees in the Company</h3>
-		<label>Search Employee</label><input type="text" id="searchEmployee" oninput="search()" class="form-control form-control-sm"  placeholder="Enter Employee Name" > <br>
+	
 		<div class="row">
+		<div class="col">
+			<label>Search Employee</label><input type="text" id="searchEmployee" oninput="search()" class="form-control form-control-sm"  placeholder="Enter Employee Name" > <br>
+		</div>
 		<div class="col">
 		<label>Gender</label>
 			<select name="gender" class="form-control form-control-sm" id="gender" onchange="search()">
@@ -63,7 +63,8 @@ opacity:90%;
 			</select>
 			</div>
 		</div>
-		<br/>
+		
+		
 		<div class=" d-flex justify-content-left">
 					<a href="" onclick="clearFilters()" class="btn btn-primary" class="form-control form-control-sm">Clear Filters</a>
 				</div>
@@ -165,6 +166,8 @@ function search(){
 	function displayEmployee(filteredData){
 		var tableData = '<thead class="thead-dark"><th>S.no</th><th>Name</th><th>EmployeeID</th><th>Gender</th><th>Role</th><th>Details</th><th>Delete</th></thead>'
 			tableData+= '<tbody>'
+			
+			if(filteredData.length!=0){
 		    for(i = 0;i < filteredData.length; i++){
 		    	tableData+= '<tr>';
 		    	tableData+= '<td>' + (parseInt(i)+1) + '</td>';
@@ -177,6 +180,10 @@ function search(){
 		    	tableData+= '</tr>';
 		    }
 			tableData+='</tbody>';
+			}
+			else{
+				tableData+="<tr><td colspan=7 class='text-center'>" + "<font color='red'>No Records Found</font>" + "</td></tr>"; 
+			}
 		    document.getElementById("employeeTable").innerHTML = tableData;
 	}	
 	/**
